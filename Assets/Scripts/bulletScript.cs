@@ -27,6 +27,7 @@ public class bulletScript : MonoBehaviour
         if (other.gameObject.tag != "Player") {
             if (other.gameObject.tag == "Enemy") {
                 Destroy(other.gameObject);
+                GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().enemiesAlive--;
             }
             Destroy(gameObject);
         }
