@@ -8,13 +8,17 @@ public class PlayerScript : MonoBehaviour
     private Vector2 movementNonZero;
     public int speed;
     public int dashDistance;
+    private float dashDelay;
     public GameObject bullet;
     public float bulletShootDelay;
+    private bool shooting;
 
     private void Awake()
     {
         movementNonZero = new(0, 1);
+        dashDelay = 0f;
         bulletShootDelay = 0f;
+        shooting = false;
     }
 
     public void OnMove(InputValue inputValue) {
@@ -25,11 +29,23 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void OnDash() {
-        transform.Translate(movementNonZero * Time.deltaTime * dashDistance);
+        if (dashDelay <= 0f) {  
+            transform.Translate(movementNonZero * Time.deltaTime * dashDistance);
+            dashDelay = 0.25f;
+        }
     }
 
     public void OnAttack() {
-        if(bulletShootDelay < 0f) {
+        shooting = !shooting;
+    }
+
+    private void Update()
+    {
+        transform.Translate(movement * Time.deltaTime * speed);
+        bulletShootDelay -= Time.deltaTime;
+        dashDelay -= Time.deltaTime;
+
+        if(shooting && bulletShootDelay < 0f) {
             Camera camera = Camera.main;
             Vector2 mousePos = camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             Vector2 direction = (mousePos - (Vector2)transform.position).normalized;
@@ -38,12 +54,5 @@ public class PlayerScript : MonoBehaviour
             newBullet.GetComponent<bulletScript>().direction = direction;
             bulletShootDelay = 0.5f;
         }
-
-    }
-
-    private void Update()
-    {
-        transform.Translate(movement * Time.deltaTime * speed);
-        bulletShootDelay -= Time.deltaTime;
     }
 }
