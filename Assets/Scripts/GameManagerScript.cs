@@ -9,7 +9,7 @@ public class GameManagerScript : MonoBehaviour
     private int roomCounter;
     private bool active;
 
-    private int xBounds = 7;
+    //private int xBounds = 7;
     private int yBounds = 7;
     
 
@@ -61,17 +61,19 @@ public class GameManagerScript : MonoBehaviour
         enemiesAlive = enemiesToSpawn.Length;
         foreach (int i in enemiesToSpawn) {
             if (i == 1) {
-                SpawnRandom(enemyPawnPrefab);
+                SpawnRandom(enemyPawnPrefab, i);
             }
         }
     }
 
-    private void SpawnRandom(GameObject enemyType) {
+    private void SpawnRandom(GameObject enemyType, int value) {
         int randomY = Random.Range(-yBounds, yBounds);
         int randomX = Random.Range(0, 1);
         int x = randomX == 0 ? 7 : -7;
 
-        Instantiate(enemyType, new Vector3(x, randomY, 0), Quaternion.identity);
+        GameObject enemy = Instantiate(enemyType, new Vector3(x, randomY, 0), Quaternion.identity);
+        enemy.GetComponent<EnemyScript>().energyValue = value;
+        
     }
 
     private void RoomComplete() {
@@ -90,7 +92,7 @@ public class GameManagerScript : MonoBehaviour
                 active = false;
                 RoomComplete();
             }
-        }    
+        }
     }
 
 }

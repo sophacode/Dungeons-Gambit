@@ -6,6 +6,8 @@ public class EnemyScript : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     public GameObject target;
 
+    public int energyValue;
+
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();

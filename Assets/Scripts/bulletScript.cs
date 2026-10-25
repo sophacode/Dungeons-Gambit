@@ -6,10 +6,16 @@ public class bulletScript : MonoBehaviour
     public Vector3 direction;
     private float bulletLife;
 
+    private GameManagerScript gameManager;
+    private PlayerScript player;
+
     private void Awake()
     {
         bulletSpeed = 5f;
         bulletLife = 10f;
+
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
 
     }
 
@@ -24,10 +30,13 @@ public class bulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag != "Player") {
-            if (other.gameObject.tag == "Enemy") {
+        string tag = other.gameObject.tag;
+        if (tag != "Player" && tag != "Bullet") {
+            if (tag == "Enemy") {
+                int energyValue = other.GetComponent<EnemyScript>().energyValue;
                 Destroy(other.gameObject);
-                GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().enemiesAlive--;
+                gameManager.enemiesAlive--;
+                player.AddEnergy(energyValue);
             }
             Destroy(gameObject);
         }
