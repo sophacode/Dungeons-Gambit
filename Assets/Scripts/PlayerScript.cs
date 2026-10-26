@@ -1,6 +1,8 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -16,20 +18,30 @@ public class PlayerScript : MonoBehaviour
     private bool shooting;
 
     private float energy;
+    public TextMeshProUGUI energyText;
+
+    public float health;
+    private float maxHealth;
 
     private void Awake()
     {
         movementNonZero = new(0, 1);
         dashDelay = 0f;
+
         bulletShootDelay = 0f;
         shooting = false;
-        energy = 0f;
         attack = 0;
+
+        energy = 0f;
+
+        maxHealth = 10f;
+        health = maxHealth;
     }
 
     public void AddEnergy(float value) {
         energy += value;
-        Debug.Log(energy);
+        //energyText.text = "Energy: " + (int)energy;
+        energyText.SetText("Energy: " + energy);
     }
 
     public void OnMove(InputValue inputValue) {
@@ -56,6 +68,7 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("Promote");
             attack = 1;
             energy -= 3f;
+            energyText.SetText("Energy: " + energy);
         }
     }
 
