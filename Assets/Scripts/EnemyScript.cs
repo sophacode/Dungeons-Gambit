@@ -18,4 +18,10 @@ public class EnemyScript : MonoBehaviour
     {
         navMeshAgent.destination = target.transform.position;
     }
+
+    private void OnDestroy()
+    {
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().enemiesAlive--;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().AddEnergy(energyValue);
+    }
 }

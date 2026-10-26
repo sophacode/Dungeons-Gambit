@@ -25,6 +25,7 @@ public class PlayerScript : MonoBehaviour
 
     private SpriteRenderer sr;
     public Sprite[] pieceSprites;
+    public GameObject[] pieceUIBacks;
 
     private void Awake()
     {
@@ -41,6 +42,13 @@ public class PlayerScript : MonoBehaviour
         health = maxHealth;
 
         sr = GetComponent<SpriteRenderer>();
+    }
+
+    private void SetPieceBack(int i) {
+        foreach (GameObject g in pieceUIBacks) {
+            g.SetActive(false);
+        }
+        pieceUIBacks[i].SetActive(true);
     }
 
     public void AddEnergy(float value) {
@@ -75,6 +83,7 @@ public class PlayerScript : MonoBehaviour
             energy -= 3f;
             energyText.SetText("Energy: " + energy);
             sr.sprite = pieceSprites[1];
+            SetPieceBack(1);
         }
     }
 

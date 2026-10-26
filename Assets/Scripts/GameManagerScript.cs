@@ -3,15 +3,19 @@ using UnityEngine;
 public class GameManagerScript : MonoBehaviour
 {
     public GameObject enemyPawnPrefab;
+    public GameObject enemyBishopPrefab;
     private int wave;
     public int enemiesAlive;
     private int[][][] rooms;
-    private int roomCounter;
-    private bool active;
+    public int roomCounter;
+    public bool active;
 
     //private int xBounds = 7;
     private int yBounds = 7;
-    
+
+    public GameObject doors;
+    public GameObject pathway;
+    public GameObject pathwayWalls;
 
     private void Awake()
     {
@@ -63,6 +67,9 @@ public class GameManagerScript : MonoBehaviour
             if (i == 1) {
                 SpawnRandom(enemyPawnPrefab, i);
             }
+            else if (i == 2) {
+                SpawnRandom(enemyBishopPrefab, i);
+            }
         }
     }
 
@@ -73,22 +80,25 @@ public class GameManagerScript : MonoBehaviour
 
         GameObject enemy = Instantiate(enemyType, new Vector3(x, randomY, 0), Quaternion.identity);
         enemy.GetComponent<EnemyScript>().energyValue = value;
-        
     }
 
     private void RoomComplete() {
         Debug.Log("Complete");
+        doors.SetActive(false);
+        pathway.SetActive(true);
+        pathwayWalls.SetActive(true);
     }
 
     private void Update()
     {
-        if (active && enemiesAlive == 0) {
+        if (active && enemiesAlive <= 0) {
             if (wave < 3) {
                 Debug.Log("Wave Clear");
                 wave ++;
                 SpawnEnemy();
             }
             else {
+                wave = 0;
                 active = false;
                 RoomComplete();
             }
