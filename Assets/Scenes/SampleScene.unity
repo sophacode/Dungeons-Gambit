@@ -2005,7 +2005,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   enemyPawnPrefab: {fileID: 6517828147163857576, guid: 4544fd4af41368334b5cd6b2f04cd7e5, type: 3}
+  enemyBishopPrefab: {fileID: 6517828147163857576, guid: b60d9a93329b737fab47342f9d38c666, type: 3}
   enemiesAlive: 0
+  roomCounter: 0
+  active: 0
   doors: {fileID: 2027648975}
   pathway: {fileID: 1457011145}
   pathwayWalls: {fileID: 1537359888}

@@ -10,8 +10,8 @@ public class GameManagerScript : MonoBehaviour
     public int roomCounter;
     public bool active;
 
-    //private int xBounds = 7;
-    private int yBounds = 7;
+    private int xBounds = 14;
+    private int yBounds = 14;
 
     public GameObject doors;
     public GameObject pathway;
@@ -76,7 +76,7 @@ public class GameManagerScript : MonoBehaviour
     private void SpawnRandom(GameObject enemyType, int value) {
         int randomY = Random.Range(-yBounds, yBounds);
         int randomX = Random.Range(0, 1);
-        int x = randomX == 0 ? 7 : -7;
+        int x = randomX == 0 ? xBounds : -xBounds;
 
         GameObject enemy = Instantiate(enemyType, new Vector3(x, randomY, 0), Quaternion.identity);
         enemy.GetComponent<EnemyScript>().energyValue = value;

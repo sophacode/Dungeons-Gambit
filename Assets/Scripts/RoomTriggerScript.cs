@@ -14,6 +14,7 @@ public class RoomTriggerScript : MonoBehaviour
         if (!gameManager.active) {
             gameManager.roomCounter++;
             gameManager.active = true;
+            //increase room bounds in game manager
         }
     }
 }
