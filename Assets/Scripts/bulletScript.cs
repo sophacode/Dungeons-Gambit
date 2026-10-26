@@ -12,7 +12,7 @@ public class bulletScript : MonoBehaviour
     private void Awake()
     {
         bulletSpeed = 5f;
-        bulletLife = 10f;
+        bulletLife = 1.5f;
 
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();

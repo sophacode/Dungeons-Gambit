@@ -23,6 +23,9 @@ public class PlayerScript : MonoBehaviour
     public float health;
     private float maxHealth;
 
+    private SpriteRenderer sr;
+    public Sprite[] pieceSprites;
+
     private void Awake()
     {
         movementNonZero = new(0, 1);
@@ -36,6 +39,8 @@ public class PlayerScript : MonoBehaviour
 
         maxHealth = 10f;
         health = maxHealth;
+
+        sr = GetComponent<SpriteRenderer>();
     }
 
     public void AddEnergy(float value) {
@@ -69,6 +74,7 @@ public class PlayerScript : MonoBehaviour
             attack = 1;
             energy -= 3f;
             energyText.SetText("Energy: " + energy);
+            sr.sprite = pieceSprites[1];
         }
     }
 
