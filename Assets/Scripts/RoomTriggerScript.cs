@@ -4,6 +4,8 @@ public class RoomTriggerScript : MonoBehaviour
 {
     GameManagerScript gameManager;
 
+    public int room;
+
     private void Awake()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
@@ -12,9 +14,8 @@ public class RoomTriggerScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!gameManager.active) {
-            gameManager.roomCounter++;
+            gameManager.roomCounter = room;
             gameManager.active = true;
-            //increase room bounds in game manager
         }
     }
 }
