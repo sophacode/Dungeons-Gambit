@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 230834144}
   - component: {fileID: 230834146}
   - component: {fileID: 230834147}
+  - component: {fileID: 230834148}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -515,6 +516,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &230834148
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230834141}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 94dbd62657a1d9084a286e5cd62245a3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &236815492
 GameObject:
   m_ObjectHideFlags: 0
@@ -4614,6 +4637,7 @@ GameObject:
   - component: {fileID: 2027648977}
   - component: {fileID: 2027648980}
   - component: {fileID: 2027648979}
+  - component: {fileID: 2027648981}
   m_Layer: 0
   m_Name: Doors/Openings
   m_TagString: Untagged
@@ -4863,6 +4887,22 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &2027648981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027648975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: NavMeshPlus::NavMeshPlus.Components.NavMeshModifier
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffffi
 --- !u!1 &2130582008
 GameObject:
   m_ObjectHideFlags: 0
@@ -4920,6 +4960,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1166253541953475661, guid: 37bb6ba7e2174ee408a73e19b352ba40, type: 3}
+      propertyPath: room
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2492941108858227735, guid: 37bb6ba7e2174ee408a73e19b352ba40, type: 3}
       propertyPath: m_Size.x
       value: 8
@@ -4930,7 +4974,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3304291144313393145, guid: 37bb6ba7e2174ee408a73e19b352ba40, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 46
+      value: 49
       objectReference: {fileID: 0}
     - target: {fileID: 3304291144313393145, guid: 37bb6ba7e2174ee408a73e19b352ba40, type: 3}
       propertyPath: m_LocalPosition.z

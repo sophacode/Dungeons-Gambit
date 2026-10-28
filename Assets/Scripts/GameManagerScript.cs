@@ -10,8 +10,8 @@ public class GameManagerScript : MonoBehaviour
     public int roomCounter;
     public bool active;
 
-    private int xBounds = 14;
-    private int yBounds = 14;
+    private int[] xBounds = new int[] {14, 14};
+    private int[] yBounds = new int[] {14, 78};
 
     public GameObject doors;
     public GameObject pathway;
@@ -65,21 +65,23 @@ public class GameManagerScript : MonoBehaviour
         enemiesAlive = enemiesToSpawn.Length;
         foreach (int i in enemiesToSpawn) {
             if (i == 1) {
-                SpawnRandom(enemyPawnPrefab, i);
+                SpawnRandom(enemyPawnPrefab, i).GetComponent<EnemyScript>().energyValue = 1;
             }
             else if (i == 2) {
-                SpawnRandom(enemyBishopPrefab, i);
+                SpawnRandom(enemyBishopPrefab, i).GetComponent<EnemyBishopScript>().energyValue = 2;
             }
         }
     }
 
-    private void SpawnRandom(GameObject enemyType, int value) {
-        int randomY = Random.Range(-yBounds, yBounds);
-        int randomX = Random.Range(0, 1);
-        int x = randomX == 0 ? xBounds : -xBounds;
+    private GameObject SpawnRandom(GameObject enemyType, int value) {
+        int xb = xBounds[roomCounter-1];
+        int yb = yBounds[roomCounter-1];
+        int randomY = Random.Range(yb-28, yb);
+        int randomX = Random.Range(0, 2);
+        int x = randomX == 0 ? xb : xb-28;
 
         GameObject enemy = Instantiate(enemyType, new Vector3(x, randomY, 0), Quaternion.identity);
-        enemy.GetComponent<EnemyScript>().energyValue = value;
+        return enemy;
     }
 
     private void RoomComplete() {
