@@ -57,6 +57,20 @@ public class PlayerScript : MonoBehaviour
         energyText.SetText("Energy: " + energy);
     }
 
+    public void TakeDamage(float damage) {
+        health -= damage;
+        if (health <= 0f) {
+            health = 0f;
+            Die();
+        }
+        //Healthbar update
+    }
+
+    private void Die() {
+
+    }
+
+
     public void OnMove(InputValue inputValue) {
         movement = inputValue.Get<Vector2>();
         if (movement != Vector2.zero ) {

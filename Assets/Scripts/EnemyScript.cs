@@ -8,10 +8,16 @@ public class EnemyScript : MonoBehaviour
 
     public int energyValue;
 
+    private EnemyHealth healthScript;
+
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player");
+        healthScript = GetComponent<EnemyHealth>();
+
+        healthScript.maxHealth = 5f;
+
     }
 
     private void Update()
@@ -24,4 +30,5 @@ public class EnemyScript : MonoBehaviour
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().enemiesAlive--;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().AddEnergy(energyValue);
     }
+
 }

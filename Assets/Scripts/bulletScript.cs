@@ -5,7 +5,7 @@ public class bulletScript : MonoBehaviour
     public float bulletSpeed;
     public Vector3 direction;
     private float bulletLife;
-    private bool canKill;
+    private bool canHit;
 
     private GameManagerScript gameManager;
     private PlayerScript player;
@@ -14,7 +14,7 @@ public class bulletScript : MonoBehaviour
     {
         bulletSpeed = 5f;
         bulletLife = 1.5f;
-        canKill = true;
+        canHit = true;
 
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
@@ -34,9 +34,9 @@ public class bulletScript : MonoBehaviour
     {
         string tag = other.gameObject.tag;
         if (tag != "Player" && tag != "Bullet") {
-            if (tag == "Enemy" && canKill) {
-                Destroy(other.gameObject);
-                canKill = false;
+            if (tag == "Enemy" && canHit) {
+                other.GetComponent<EnemyHealth>().TakeDamage(1f);
+                canHit = false;
             }
             Destroy(gameObject);
         }
