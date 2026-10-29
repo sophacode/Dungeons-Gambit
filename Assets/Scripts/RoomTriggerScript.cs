@@ -14,8 +14,7 @@ public class RoomTriggerScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!gameManager.active) {
-            gameManager.roomCounter = room;
-            gameManager.active = true;
+            gameManager.EnterRoom(room);
         }
     }
 }

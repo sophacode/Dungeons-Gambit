@@ -10,8 +10,8 @@ public class GameManagerScript : MonoBehaviour
     public int roomCounter;
     public bool active;
 
-    private int[] xBounds = new int[] {14, 14};
-    private int[] yBounds = new int[] {14, 78};
+    private readonly int[] xBounds = new int[] {14, 14};
+    private readonly int[] yBounds = new int[] {14, 78};
 
     public GameObject doors;
     public GameObject pathway;
@@ -65,15 +65,15 @@ public class GameManagerScript : MonoBehaviour
         enemiesAlive = enemiesToSpawn.Length;
         foreach (int i in enemiesToSpawn) {
             if (i == 1) {
-                SpawnRandom(enemyPawnPrefab, i).GetComponent<EnemyScript>().energyValue = 1;
+                SpawnRandom(enemyPawnPrefab).GetComponent<EnemyScript>().energyValue = 1;
             }
             else if (i == 2) {
-                SpawnRandom(enemyBishopPrefab, i).GetComponent<EnemyBishopScript>().energyValue = 2;
+                SpawnRandom(enemyBishopPrefab).GetComponent<EnemyBishopScript>().energyValue = 2;
             }
         }
     }
 
-    private GameObject SpawnRandom(GameObject enemyType, int value) {
+    private GameObject SpawnRandom(GameObject enemyType) {
         int xb = xBounds[roomCounter-1];
         int yb = yBounds[roomCounter-1];
         int randomY = Random.Range(yb-28, yb);
@@ -89,6 +89,15 @@ public class GameManagerScript : MonoBehaviour
         doors.SetActive(false);
         pathway.SetActive(true);
         pathwayWalls.SetActive(true);
+    }
+
+    public void EnterRoom(int room) {
+        roomCounter = room;
+        doors.SetActive(true);
+        pathway.SetActive(false);
+        pathwayWalls.SetActive(false);
+        active = true;
+        wave = 0;
     }
 
     private void Update()

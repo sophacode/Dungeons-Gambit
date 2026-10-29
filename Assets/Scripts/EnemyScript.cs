@@ -16,7 +16,7 @@ public class EnemyScript : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player");
         healthScript = GetComponent<EnemyHealth>();
 
-        healthScript.maxHealth = 5f;
+        healthScript.maxHealth = 3f;
 
     }
 
