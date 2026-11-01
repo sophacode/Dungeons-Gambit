@@ -22,7 +22,9 @@ public class EnemyScript : MonoBehaviour
 
     private void Update()
     {
+        if (healthScript.alive) {
         navMeshAgent.destination = target.transform.position;
+        }
     }
 
     private void OnDestroy()

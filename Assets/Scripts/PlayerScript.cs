@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject bullet;
     public float bulletShootDelay;
     private bool shooting;
+    public GameObject knightMeelee;
 
     private float energy;
     public TextMeshProUGUI energyText;
@@ -26,6 +28,8 @@ public class PlayerScript : MonoBehaviour
     private SpriteRenderer sr;
     public Sprite[] pieceSprites;
     public GameObject[] pieceUIBacks;
+
+    private Animator anim;
 
     private void Awake()
     {
@@ -42,6 +46,7 @@ public class PlayerScript : MonoBehaviour
         health = maxHealth;
 
         sr = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     private void SetPieceBack(int i) {
@@ -75,6 +80,10 @@ public class PlayerScript : MonoBehaviour
         movement = inputValue.Get<Vector2>();
         if (movement != Vector2.zero ) {
             movementNonZero = movement;
+            anim.SetBool("Walking", true);
+        }
+        else {
+            anim.SetBool("Walking", false);
         }
     }
 
@@ -96,8 +105,21 @@ public class PlayerScript : MonoBehaviour
             attack = 1;
             energy -= 3f;
             energyText.SetText("Energy: " + energy);
+            anim.SetTrigger("PromoteBishop");
             sr.sprite = pieceSprites[1];
             SetPieceBack(1);
+        }
+    }
+
+    public void OnPromoteKnight() {
+        Debug.Log("Attempting to promote to knight");
+        if (energy >= 5f) {
+            Debug.Log("Promote Knight");
+            attack = 2;
+            energy -= 5f;
+            energyText.SetText("Energy: " + energy);
+            anim.SetTrigger("PromoteKnight");
+            sr.sprite = pieceSprites[2];
         }
     }
 
@@ -129,6 +151,11 @@ public class PlayerScript : MonoBehaviour
                     bulletS.bulletSpeed = 10f;
                 }
                 bulletShootDelay = 0.3f;
+            }
+            else if (attack == 2) {
+                //Kinght attack
+                GameObject melee = Instantiate(knightMeelee, transform.position, Quaternion.Euler(0,0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f));
+                bulletShootDelay = 1f;
             }
         }
     }

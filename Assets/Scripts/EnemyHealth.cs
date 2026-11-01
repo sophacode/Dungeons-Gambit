@@ -5,6 +5,7 @@ public class EnemyHealth : MonoBehaviour
 {
     public float maxHealth;
     public float health;
+    public bool alive;
 
     private SpriteRenderer sr;
 
@@ -12,33 +13,51 @@ public class EnemyHealth : MonoBehaviour
         health -= damage;
         StartCoroutine(Flicker());
         if (health <= 0f) {
-            Destroy(gameObject);
+            alive = false;
+            StartCoroutine(Death());
         }
     }
 
     private IEnumerator Flicker() {
+        float duration = 0.1f;
         Color c = sr.color;
         for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 5; j++){
-                float alpha = Mathf.Lerp(1f, 0.5f, (j + 1) / 5f);
+            float elapsed = 0f;
+            while (elapsed < duration) {
+                elapsed += Time.deltaTime;
+                float alpha = Mathf.Lerp(1f, 0.5f, elapsed / duration);
                 sr.color = new Color(c.r, c.g, c.b, alpha);
                 yield return null;
             }
-            Debug.Log(sr.color);
-            for (int j = 0; j < 5; j++){
-                float alpha = Mathf.Lerp(0.5f, 1f, (j + 1) / 5f);
+            elapsed = 0f;
+            while (elapsed < duration) {
+                elapsed += Time.deltaTime;
+                float alpha = Mathf.Lerp(0.5f, 1f, elapsed / duration);
                 sr.color = new Color(c.r, c.g, c.b, alpha);
                 yield return null;
             }
-            sr.color = new Color (sr.color.r, sr.color.g, sr.color.b, 1f);
-            yield return null;
-            Debug.Log(sr.color);
         }
+        sr.color = new Color(c.r, c.g, c.b, 1f);
+    }
+
+    private IEnumerator Death() {
+        float duration = 0.1f;
+        Color c = sr.color;
+        sr.color = new Color(c.r, 0, 0, c.a);
+        float elapsed = 0f;
+        while (elapsed < duration) {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0.5f, elapsed / duration);
+            sr.color = new Color(c.r, c.g, c.b, alpha);
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 
     private void Awake()
     {
         health = maxHealth;
+        alive = true;
         sr = GetComponent<SpriteRenderer>();
     }
 

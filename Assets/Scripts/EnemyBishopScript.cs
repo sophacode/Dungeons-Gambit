@@ -23,14 +23,16 @@ public class EnemyBishopScript : MonoBehaviour
 
     private void Update()
     {
-        navMeshAgent.destination = target.transform.position;
+        if (healthScript.alive) {
+            navMeshAgent.destination = target.transform.position;
 
-        shootDelay -= Time.deltaTime;
-        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && shootDelay <= 0f) {
-            Vector3 direction = (target.transform.position - transform.position).normalized;
-            GameObject bullet = Instantiate(enemyBishopBUllet, transform.position, Quaternion.identity);
-            bullet.GetComponent<EnemyBishopBulletScript>().direction = direction;
-            shootDelay = 1f;
+            shootDelay -= Time.deltaTime;
+            if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && shootDelay <= 0f) {
+                Vector3 direction = (target.transform.position - transform.position).normalized;
+                GameObject bullet = Instantiate(enemyBishopBUllet, transform.position, Quaternion.identity);
+                bullet.GetComponent<EnemyBishopBulletScript>().direction = direction;
+                shootDelay = 1f;
+            }
         }
     }
 
