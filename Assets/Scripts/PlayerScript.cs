@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -68,6 +69,7 @@ public class PlayerScript : MonoBehaviour
 
     public void TakeDamage(float damage) {
         health -= damage;
+        StartCoroutine(Flicker());
         if (health <= 0f) {
             health = 0f;
             Die();
@@ -75,8 +77,30 @@ public class PlayerScript : MonoBehaviour
         //Healthbar update
     }
 
-    private void Die() {
+    private IEnumerator Flicker() {
+        float duration = 0.1f;
+        Color c = sr.color;
+        for (int i = 0; i < 2; i++) {
+            float elapsed = 0f;
+            while (elapsed < duration) {
+                elapsed += Time.deltaTime;
+                float alpha = Mathf.Lerp(1f, 0.5f, elapsed / duration);
+                sr.color = new Color(c.r, c.g, c.b, alpha);
+                yield return null;
+            }
+            elapsed = 0f;
+            while (elapsed < duration) {
+                elapsed += Time.deltaTime;
+                float alpha = Mathf.Lerp(0.5f, 1f, elapsed / duration);
+                sr.color = new Color(c.r, c.g, c.b, alpha);
+                yield return null;
+            }
+        }
+        sr.color = new Color(c.r, c.g, c.b, 1f);
+    }
 
+    private void Die() {
+        Debug.Log("DEAD");
     }
 
 
@@ -106,7 +130,7 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("Unpromote");
         attack = 0;
         anim.SetBool("Walking", false);
-        anim.SetTrigger("UnPromote");
+        anim.SetTrigger("Unpromote");
         sr.sprite = pieceSprites[0];
     }
 

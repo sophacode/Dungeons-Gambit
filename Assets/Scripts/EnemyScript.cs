@@ -10,6 +10,8 @@ public class EnemyScript : MonoBehaviour
 
     private EnemyHealth healthScript;
 
+    private float damageDelay;
+
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -18,19 +20,29 @@ public class EnemyScript : MonoBehaviour
 
         healthScript.maxHealth = 3f;
 
+        damageDelay = 0f;
     }
 
     private void Update()
     {
         if (healthScript.alive) {
-        navMeshAgent.destination = target.transform.position;
+            navMeshAgent.destination = target.transform.position;
         }
+        damageDelay -= Time.deltaTime;
     }
 
     private void OnDestroy()
     {
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().enemiesAlive--;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().AddEnergy(energyValue);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.gameObject == target && damageDelay <= 0f) {
+            target.GetComponent<PlayerScript>().TakeDamage(1f);
+            damageDelay = 1f;
+        }
     }
 
 }
