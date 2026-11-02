@@ -34,6 +34,8 @@ public class PlayerScript : MonoBehaviour
 
     private float promotionTime;
 
+    [SerializeField] GameObject pauseUIPanel;
+
     private void Awake()
     {
         movementNonZero = new(0, 1);
@@ -106,11 +108,13 @@ public class PlayerScript : MonoBehaviour
     public void OnPause() {
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().OnPause();
         GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
+        pauseUIPanel.SetActive(true);
     }
 
     public void OnPlay() {
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().OnPlay();
         GetComponent<PlayerInput>().SwitchCurrentActionMap("Movement");
+        pauseUIPanel.SetActive(false);
     }
 
     public void OnMove(InputValue inputValue) {
