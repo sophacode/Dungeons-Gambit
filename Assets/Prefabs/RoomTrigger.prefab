@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c82bfa72e59fb867905fa89d32612f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  room: 0
 --- !u!61 &2492941108858227735
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -89,5 +90,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 8, y: 1}
   m_EdgeRadius: 0

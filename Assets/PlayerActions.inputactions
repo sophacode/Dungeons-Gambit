@@ -55,6 +55,16 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "PromoteRook",
+                    "type": "Button",
+                    "id": "604c6a3e-c8d2-4f5d-a4e5-6fa8b2d6de15",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -154,6 +164,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "PromoteKnight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8c2e8ae3-a4a8-4fb6-a0eb-750a2a4ce237",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PromoteRook",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

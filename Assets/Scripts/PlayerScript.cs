@@ -31,6 +31,8 @@ public class PlayerScript : MonoBehaviour
 
     private Animator anim;
 
+    private float promotionTime;
+
     private void Awake()
     {
         movementNonZero = new(0, 1);
@@ -44,6 +46,8 @@ public class PlayerScript : MonoBehaviour
 
         maxHealth = 10f;
         health = maxHealth;
+
+        promotionTime = 0f;
 
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -98,6 +102,14 @@ public class PlayerScript : MonoBehaviour
         shooting = !shooting;
     }
 
+    private void UnPromote() {
+        Debug.Log("Unpromote");
+        attack = 0;
+        anim.SetBool("Walking", false);
+        anim.SetTrigger("UnPromote");
+        sr.sprite = pieceSprites[0];
+    }
+
     public void OnPromoteBishop() {
         Debug.Log("Attempting to promote to bishop");
         if (energy >= 3f) {
@@ -105,9 +117,10 @@ public class PlayerScript : MonoBehaviour
             attack = 1;
             energy -= 3f;
             energyText.SetText("Energy: " + energy);
+            anim.SetBool("Walking", false);
             anim.SetTrigger("PromoteBishop");
             sr.sprite = pieceSprites[1];
-            SetPieceBack(1);
+            promotionTime = 10f;
         }
     }
 
@@ -118,8 +131,10 @@ public class PlayerScript : MonoBehaviour
             attack = 2;
             energy -= 5f;
             energyText.SetText("Energy: " + energy);
+            anim.SetBool("Walking", false);
             anim.SetTrigger("PromoteKnight");
             sr.sprite = pieceSprites[2];
+            promotionTime = 10f;
         }
     }
 
@@ -130,8 +145,10 @@ public class PlayerScript : MonoBehaviour
             attack = 3;
             energy -= 10f;
             energyText.SetText("Energy: " + energy);
+            anim.SetBool("Walking", false);
             anim.SetTrigger("PromoteRook");
             sr.sprite = pieceSprites[3];
+            promotionTime = 10f;
         }
     }
 
@@ -140,6 +157,11 @@ public class PlayerScript : MonoBehaviour
         transform.Translate(movement * Time.deltaTime * speed);
         bulletShootDelay -= Time.deltaTime;
         dashDelay -= Time.deltaTime;
+
+        promotionTime -= Time.deltaTime;
+        if (attack != 0 && promotionTime <= 0f) {
+            UnPromote();
+        }
 
         if(shooting && bulletShootDelay < 0f) {
             Camera camera = Camera.main;
