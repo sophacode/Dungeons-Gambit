@@ -27,8 +27,7 @@ public class MeleeScript : MonoBehaviour
         string tag = other.gameObject.tag;
         if (tag != "Player" && tag != "Bullet") {
             if (tag == "Enemy" && canHit) {
-                other.GetComponent<EnemyHealth>().TakeDamage(1f);
-                canHit = false;
+                other.GetComponent<EnemyHealth>().TakeDamage(2f);
             }
         }
 

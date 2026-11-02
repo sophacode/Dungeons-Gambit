@@ -123,6 +123,18 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public void OnPromoteRook() {
+        Debug.Log("Attempting to promote to rook");
+        if (energy >= 10f) {
+            Debug.Log("Promote Rook");
+            attack = 3;
+            energy -= 10f;
+            energyText.SetText("Energy: " + energy);
+            anim.SetTrigger("PromoteRook");
+            sr.sprite = pieceSprites[3];
+        }
+    }
+
     private void Update()
     {
         transform.Translate(movement * Time.deltaTime * speed);
@@ -139,6 +151,7 @@ public class PlayerScript : MonoBehaviour
                 bulletScript bulletS = newBullet.GetComponent<bulletScript>();
                 bulletS.direction = direction;
                 bulletS.bulletSpeed = 5f;
+                bulletS.damage = 1f;
                 bulletShootDelay = 0.5f;
             }
             else if (attack == 1) {
@@ -149,12 +162,23 @@ public class PlayerScript : MonoBehaviour
                     bulletScript bulletS = newBullet.GetComponent<bulletScript>();
                     bulletS.direction = dir;
                     bulletS.bulletSpeed = 10f;
+                    bulletS.damage = 1f;
                 }
                 bulletShootDelay = 0.3f;
             }
             else if (attack == 2) {
                 //Kinght attack
                 GameObject melee = Instantiate(knightMeelee, transform.position, Quaternion.Euler(0,0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f));
+                bulletShootDelay = 1f;
+            }
+            else if (attack == 3) {
+                //Rook attack
+                GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                newBullet.transform.localScale = new Vector3(2f, 2f, 0f);
+                bulletScript bulletS = newBullet.GetComponent<bulletScript>();
+                bulletS.direction = direction;
+                bulletS.bulletSpeed = 3f;
+                bulletS.damage = 3f;
                 bulletShootDelay = 1f;
             }
         }

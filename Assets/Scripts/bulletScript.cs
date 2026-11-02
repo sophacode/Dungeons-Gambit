@@ -7,6 +7,8 @@ public class bulletScript : MonoBehaviour
     private float bulletLife;
     private bool canHit;
 
+    public float damage;
+
     private GameManagerScript gameManager;
     private PlayerScript player;
 
@@ -35,7 +37,7 @@ public class bulletScript : MonoBehaviour
         string tag = other.gameObject.tag;
         if (tag != "Player" && tag != "Bullet") {
             if (tag == "Enemy" && canHit) {
-                other.GetComponent<EnemyHealth>().TakeDamage(1f);
+                other.GetComponent<EnemyHealth>().TakeDamage(damage);
                 canHit = false;
             }
             Destroy(gameObject);
