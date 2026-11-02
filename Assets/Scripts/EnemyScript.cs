@@ -12,11 +12,14 @@ public class EnemyScript : MonoBehaviour
 
     private float damageDelay;
 
+    private GameManagerScript gameManager;
+
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player");
         healthScript = GetComponent<EnemyHealth>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
 
         healthScript.maxHealth = 3f;
 
@@ -25,15 +28,20 @@ public class EnemyScript : MonoBehaviour
 
     private void Update()
     {
-        if (healthScript.alive) {
+        if (healthScript.alive && gameManager.active) {
+            navMeshAgent.isStopped = false;
             navMeshAgent.destination = target.transform.position;
+        }
+        else {
+            navMeshAgent.isStopped = true;
+            navMeshAgent.velocity = Vector3.zero;
         }
         damageDelay -= Time.deltaTime;
     }
 
     private void OnDestroy()
     {
-        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().enemiesAlive--;
+        gameManager.enemiesAlive--;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().AddEnergy(energyValue);
     }
 

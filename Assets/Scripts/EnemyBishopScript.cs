@@ -11,11 +11,14 @@ public class EnemyBishopScript : MonoBehaviour
     public int energyValue;
     private EnemyHealth healthScript;
 
+    private GameManagerScript gameManager;
+
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player");
         healthScript = GetComponent<EnemyHealth>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
 
         healthScript.maxHealth = 5f;
 
@@ -23,7 +26,8 @@ public class EnemyBishopScript : MonoBehaviour
 
     private void Update()
     {
-        if (healthScript.alive) {
+        if (healthScript.alive && gameManager.active) {
+            navMeshAgent.isStopped = false;
             navMeshAgent.destination = target.transform.position;
 
             shootDelay -= Time.deltaTime;
@@ -34,11 +38,15 @@ public class EnemyBishopScript : MonoBehaviour
                 shootDelay = 1f;
             }
         }
+        else {
+            navMeshAgent.isStopped = true;
+            navMeshAgent.velocity = Vector3.zero;
+        }
     }
 
     private void OnDestroy()
     {
-        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().enemiesAlive--;
+        gameManager.enemiesAlive--;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().AddEnergy(energyValue);
     }
 }

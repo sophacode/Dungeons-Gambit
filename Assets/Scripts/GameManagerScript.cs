@@ -18,6 +18,14 @@ public class GameManagerScript : MonoBehaviour
     public GameObject pathway;
     public GameObject pathwayWalls;
 
+    public void OnPause() {
+        active = false;
+    }
+
+    public void OnPlay() {
+        active = true;
+    }
+
     private void Awake()
     {
         wave = 0;

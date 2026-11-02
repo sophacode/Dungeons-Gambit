@@ -103,6 +103,15 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("DEAD");
     }
 
+    public void OnPause() {
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().OnPause();
+        GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
+    }
+
+    public void OnPlay() {
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().OnPlay();
+        GetComponent<PlayerInput>().SwitchCurrentActionMap("Movement");
+    }
 
     public void OnMove(InputValue inputValue) {
         movement = inputValue.Get<Vector2>();
@@ -214,7 +223,7 @@ public class PlayerScript : MonoBehaviour
             }
             else if (attack == 2) {
                 //Kinght attack
-                GameObject melee = Instantiate(knightMeelee, transform.position, Quaternion.Euler(0,0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f));
+                GameObject melee = Instantiate(knightMeelee, transform.position, Quaternion.Euler(0,0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg));
                 bulletShootDelay = 1f;
             }
             else if (attack == 3) {

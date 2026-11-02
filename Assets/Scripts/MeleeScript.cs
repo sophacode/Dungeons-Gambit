@@ -8,7 +8,7 @@ public class MeleeScript : MonoBehaviour
 
     private void Awake()
     {
-        life = 1f;
+        life = 0.75f;
         canHit = true;
         player = GameObject.FindGameObjectWithTag("Player");
     }
