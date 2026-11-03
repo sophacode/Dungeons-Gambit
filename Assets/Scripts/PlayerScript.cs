@@ -29,6 +29,7 @@ public class PlayerScript : MonoBehaviour
     private SpriteRenderer sr;
     public Sprite[] pieceSprites;
     public GameObject[] pieceUIBacks;
+    public Sprite dashBlurSprite;
 
     private Animator anim;
 
@@ -130,9 +131,27 @@ public class PlayerScript : MonoBehaviour
 
     public void OnDash() {
         if (dashDelay <= 0f) {  
+            DashFX();
             transform.Translate(movementNonZero * Time.deltaTime * dashDistance);
             dashDelay = 0.25f;
         }
+    }
+
+
+    private void DashFX() { //hopefully spawns dash sprite behind character
+        Debug.Log("Dash is called");
+        var dash = new GameObject("DashFX");
+        dash.transform.position = sr.transform.position;
+        dash.transform.localScale = Vector3.one;
+        
+        var dashSprite = dash.AddComponent<SpriteRenderer>();
+        dashSprite.sprite = dashBlurSprite;
+        float angle = Mathf.Atan2(movementNonZero.y, movementNonZero.x) * Mathf.Rad2Deg;
+        dash.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        dashSprite.flipY = movementNonZero.x < 0;
+        dashSprite.sortingLayerID = sr.sortingLayerID;
+        dashSprite.sortingOrder = 2; //player is on layer 3, so this is always behind
+        Destroy(dash, 0.2f);
     }
 
     public void OnAttack() {
