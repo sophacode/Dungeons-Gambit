@@ -33,6 +33,7 @@ public class PlayerScript : MonoBehaviour
     private SpriteRenderer dashBlurSr;
 
     private Animator anim;
+    public UIswitching uilogic;
 
     private float promotionTime;
 
@@ -71,6 +72,7 @@ public class PlayerScript : MonoBehaviour
         energy += value;
         //energyText.text = "Energy: " + (int)energy;
         energyText.SetText("Energy: " + energy);
+        uilogic.updatePieceFills(energy);
     }
 
     public void TakeDamage(float damage) {
@@ -136,7 +138,7 @@ public class PlayerScript : MonoBehaviour
         if (dashDelay <= 0f) {  
             DashFX();
             transform.Translate(movementNonZero * Time.deltaTime * dashDistance);
-            dashDelay = 0.25f;
+            dashDelay = 0.5f;
         }
     }
 
