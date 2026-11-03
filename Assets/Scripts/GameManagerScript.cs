@@ -11,8 +11,8 @@ public class GameManagerScript : MonoBehaviour
     public int roomCounter;
     public bool active;
 
-    private readonly int[] xBounds = new int[] {14, 14};
-    private readonly int[] yBounds = new int[] {14, 78};
+    private readonly int[] xBounds = new int[] {14, 14, -50, 78, 14};
+    private readonly int[] yBounds = new int[] {14, 78, 78, 78, 132};
 
     public GameObject doors;
     public GameObject pathway;
@@ -79,7 +79,7 @@ public class GameManagerScript : MonoBehaviour
             else if (i == 2) {
                 SpawnRandom(enemyBishopPrefab).GetComponent<EnemyBishopScript>().energyValue = 2;
             }
-            else if (i==2) {
+            else if (i == 3) {
                 SpawnRandom(enemyKnightPrefab).GetComponent<EnemyKnightScript>().energyValue = 2;
             }
         }

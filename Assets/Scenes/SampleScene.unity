@@ -4338,7 +4338,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1538238895}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: LoadMainMenu
         m_Mode: 1
@@ -9549,7 +9549,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1538238895}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: returntoGame
+        m_MethodName: ReturntoGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10722,8 +10722,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 642803696}
-  - {fileID: 509143618}
   - {fileID: 423402533}
+  - {fileID: 509143618}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
