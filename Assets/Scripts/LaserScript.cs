@@ -5,17 +5,21 @@ public class LaserScript : MonoBehaviour
     private float life;
     private bool canHit;
     private GameObject player;
+    private float y;
 
     private void Awake()
     {
         life = 0.3f;
         canHit = true;
         player = GameObject.FindGameObjectWithTag("Player");
+        y = 0f;
     }
 
     private void Update()
     {
         transform.position = player.transform.position;
+        y += 0.05f;
+        transform.localScale = new Vector3(1, y, 1);
         life -= Time.deltaTime;
         if (life < 0f) {
             Destroy(gameObject);
