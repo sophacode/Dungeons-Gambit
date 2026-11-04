@@ -45,7 +45,6 @@ public class UIswitching : MonoBehaviour
 
     public void ReturntoGame()
     {
-        Debug.Log("game Button");
-        pauseUIPanel.SetActive(false);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().OnPlay();
     }
 }
