@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
 public class PlayerScript : MonoBehaviour
 {
     private Vector2 movement;
