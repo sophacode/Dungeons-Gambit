@@ -5,6 +5,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject enemyPawnPrefab;
     public GameObject enemyBishopPrefab;
     public GameObject enemyKnightPrefab;
+    public GameObject enemyRookPrefab;
     private int wave;
     public int enemiesAlive;
     private int[][][] rooms;
@@ -81,6 +82,9 @@ public class GameManagerScript : MonoBehaviour
             }
             else if (i == 3) {
                 SpawnRandom(enemyKnightPrefab).GetComponent<EnemyKnightScript>().energyValue = 2;
+            }
+            else if (i == 4) {
+                SpawnRandom(enemyRookPrefab).GetComponent<EnemyRookScript>().energyValue = 3;
             }
         }
     }

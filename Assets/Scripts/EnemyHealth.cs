@@ -54,7 +54,7 @@ public class EnemyHealth : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void Awake()
+    private void Start()
     {
         health = maxHealth;
         alive = true;

@@ -176,7 +176,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.658, y: 1.28}
   m_EdgeRadius: 0
 --- !u!50 &-4239453851762830871
 Rigidbody2D:
@@ -232,3 +232,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7ec91818eb66d984ac790c90b36a5f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  target: {fileID: 0}
+  energyValue: 0
