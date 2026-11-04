@@ -13,7 +13,7 @@ public class EnemyBishopBulletScript : MonoBehaviour
     private void Awake()
     {
         bulletSpeed = 5f;
-        bulletLife = 1.5f;
+        bulletLife = 3f;
         canKill = true;
 
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>();
