@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &127073606460071021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4689455998389572585}
+  m_Layer: 0
+  m_Name: Anchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4689455998389572585
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127073606460071021}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7870514945321762127}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6517828147163857576
 GameObject:
   m_ObjectHideFlags: 0
@@ -15,7 +46,7 @@ GameObject:
   - component: {fileID: -6713296035484918050}
   - component: {fileID: -4239453851762830871}
   - component: {fileID: 7731925804708674976}
-  - component: {fileID: 827847178093521050}
+  - component: {fileID: 3265761443305253364}
   m_Layer: 0
   m_Name: Enemy_Queen
   m_TagString: Enemy
@@ -35,7 +66,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4689455998389572585}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6785067177042773001
@@ -220,7 +252,7 @@ MonoBehaviour:
   maxHealth: 0
   health: 0
   alive: 0
---- !u!114 &827847178093521050
+--- !u!114 &3265761443305253364
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,9 +261,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6517828147163857576}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ec0ff4ff420697768c3c6f9cab12c3d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ad0705f64a700235bd0db426950f566, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyQueenScript
   target: {fileID: 0}
-  rookBullet: {fileID: 2846969314011449836, guid: 2507a6b3e7b8c9e4db5eff751c50167b, type: 3}
   energyValue: 0
+  laser: {fileID: 4720778189058666122, guid: 33ae5d9f9bbe31766a084b37a802b85c, type: 3}
+  laserAnchor: {fileID: 4689455998389572585}
+  bullet: {fileID: 2846969314011449836, guid: f19a184b20cbf7f67a9015e23ed31158, type: 3}
+  pawn: {fileID: 6517828147163857576, guid: 4544fd4af41368334b5cd6b2f04cd7e5, type: 3}
