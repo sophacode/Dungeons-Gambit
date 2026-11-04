@@ -9,7 +9,7 @@ public class UIswitching : MonoBehaviour
     [SerializeField] GameObject pauseUIPanel;
     public Image[] pieceEmpty;
     public Image[] pieceFilled;
-    public float[] energyLevels = { 3f, 5f, 10f, 15f }; //queen is placeholder 15 for now
+    public float[] energyLevels = { 3f, 5f, 10f, 20f }; //queen is placeholder 15 for now
 
 
     public void Awake() {

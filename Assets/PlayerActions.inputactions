@@ -67,6 +67,16 @@
                     "priority": 0
                 },
                 {
+                    "name": "PromoteQueen",
+                    "type": "Button",
+                    "id": "b113c6f8-054d-42ba-be07-b2108eaf9e1d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "772ace92-b06a-4f8c-9e43-bad4a573294f",
@@ -196,6 +206,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ce8f68f9-e79d-4d14-8c80-41ab2f92bf80",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PromoteQueen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -434,6 +434,7 @@ MonoBehaviour:
   bullet: {fileID: 2846969314011449836, guid: c2b702e2a4974bf31bebf171ba53dbd3, type: 3}
   bulletShootDelay: 0
   knightMeelee: {fileID: 2738879260246124565, guid: 8fc337895c84327209a7d755c9a9160d, type: 3}
+  laser: {fileID: 4720778189058666122, guid: a4a7ff7ca2b54970d80df7d8af8010a2, type: 3}
   energyText: {fileID: 743558148}
   health: 0
   pieceSprites:
@@ -4460,7 +4461,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: " ?\n10\n 5\n 3"
+  m_text: "20\n10\n 5\n 3"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7241320f1e6a68419a1218ac3a499cf, type: 2}
   m_sharedMaterial: {fileID: 4926896182144184566, guid: c7241320f1e6a68419a1218ac3a499cf, type: 2}

@@ -20,6 +20,7 @@ public class PlayerScript : MonoBehaviour
     public float bulletShootDelay;
     private bool shooting;
     public GameObject knightMeelee;
+    public GameObject laser;
 
     private float energy;
     public TextMeshProUGUI energyText;
@@ -50,7 +51,7 @@ public class PlayerScript : MonoBehaviour
         shooting = false;
         attack = 0;
 
-        energy = 0f;
+        energy = 20f;
 
         maxHealth = 10f;
         health = maxHealth;
@@ -181,10 +182,7 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("Promote");
             attack = 1;
             AddEnergy(-3);
-            energyText.SetText("Energy: " + energy);
-            anim.SetBool("Walking", false);
             anim.SetTrigger("PromoteBishop");
-            sr.sprite = pieceSprites[1];
             promotionTime = 10f;
         }
     }
@@ -195,10 +193,7 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("Promote Knight");
             attack = 2;
             AddEnergy(-5);
-            energyText.SetText("Energy: " + energy);
-            anim.SetBool("Walking", false);
             anim.SetTrigger("PromoteKnight");
-            sr.sprite = pieceSprites[2];
             promotionTime = 10f;
         }
     }
@@ -209,13 +204,22 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("Promote Rook");
             attack = 3;
             AddEnergy(-10);
-            energyText.SetText("Energy: " + energy);
-            anim.SetBool("Walking", false);
             anim.SetTrigger("PromoteRook");
-            sr.sprite = pieceSprites[3];
             promotionTime = 10f;
         }
     }
+
+    public void OnPromoteQueen() {
+        Debug.Log("Attempting to promote to queen");
+        if (energy >= 20f) {
+            Debug.Log("Promote Queen");
+            attack = 4;
+            AddEnergy(-20);
+            anim.SetTrigger("PromoteQueen");
+            promotionTime = 10f;
+        }
+    }
+
 
     private void Update()
     {
@@ -243,7 +247,7 @@ public class PlayerScript : MonoBehaviour
             }
             else if (attack == 1) {
                 //Bishop attack
-                Vector2[] v = new Vector2[] {new(0.5f, 0.5f), new(0.5f, -0.5f), new(-0.5f, 0.5f), new(-0.5f, -0.5f)};
+                Vector2[] v = new Vector2[] {new(1, 1), new(1, -1), new(-1, 1), new(-1, -1)};
                 foreach (Vector2 dir in v) {
                     GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
                     bulletScript bulletS = newBullet.GetComponent<bulletScript>();
@@ -267,6 +271,14 @@ public class PlayerScript : MonoBehaviour
                 bulletS.bulletSpeed = 3f;
                 bulletS.damage = 3f;
                 bulletShootDelay = 1f;
+            }
+            else {
+                Vector2[] v = new Vector2[] {new(1, 0), new(0,-1), new(-1, 0), new(0, 1), new(1, 1), new(1, -1), new(-1, 1), new(-1, -1)};
+                foreach (Vector2 dir in v) {
+                    Debug.Log(Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+                    GameObject newLaser = Instantiate(laser, transform.position, Quaternion.Euler(0,0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg));
+                    bulletShootDelay = 1f;
+                }
             }
         }
     }
