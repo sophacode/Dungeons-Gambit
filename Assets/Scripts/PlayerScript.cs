@@ -39,6 +39,7 @@ public class PlayerScript : MonoBehaviour
     private float promotionTime;
 
     [SerializeField] GameObject pauseUIPanel;
+    [SerializeField] GameObject healthBar;
 
     private void Awake()
     {
@@ -78,6 +79,7 @@ public class PlayerScript : MonoBehaviour
 
     public void TakeDamage(float damage) {
         health -= damage;
+        healthBar.transform.localScale = new Vector3(health/maxHealth, 1f, 1f);
         StartCoroutine(Flicker());
         if (health <= 0f) {
             health = 0f;
@@ -178,7 +180,7 @@ public class PlayerScript : MonoBehaviour
         if (energy >= 3f) {
             Debug.Log("Promote");
             attack = 1;
-            energy -= 3f;
+            AddEnergy(-3);
             energyText.SetText("Energy: " + energy);
             anim.SetBool("Walking", false);
             anim.SetTrigger("PromoteBishop");
@@ -192,7 +194,7 @@ public class PlayerScript : MonoBehaviour
         if (energy >= 5f) {
             Debug.Log("Promote Knight");
             attack = 2;
-            energy -= 5f;
+            AddEnergy(-5);
             energyText.SetText("Energy: " + energy);
             anim.SetBool("Walking", false);
             anim.SetTrigger("PromoteKnight");
@@ -206,7 +208,7 @@ public class PlayerScript : MonoBehaviour
         if (energy >= 10f) {
             Debug.Log("Promote Rook");
             attack = 3;
-            energy -= 10f;
+            AddEnergy(-10);
             energyText.SetText("Energy: " + energy);
             anim.SetBool("Walking", false);
             anim.SetTrigger("PromoteRook");
