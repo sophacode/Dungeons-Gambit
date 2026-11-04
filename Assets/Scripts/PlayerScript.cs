@@ -27,6 +27,7 @@ public class PlayerScript : MonoBehaviour
 
     public float health;
     private float maxHealth;
+    private bool canTakeDamage;
 
     private SpriteRenderer sr;
     public Sprite[] pieceSprites;
@@ -55,6 +56,7 @@ public class PlayerScript : MonoBehaviour
 
         maxHealth = 10f;
         health = maxHealth;
+        canTakeDamage = true;
 
         promotionTime = 0f;
 
@@ -73,20 +75,20 @@ public class PlayerScript : MonoBehaviour
 
     public void AddEnergy(float value) {
         energy += value;
-        //energyText.text = "Energy: " + (int)energy;
         energyText.SetText("Energy: " + energy);
         uilogic.updatePieceFills(energy);
     }
 
     public void TakeDamage(float damage) {
-        health -= damage;
-        healthBar.transform.localScale = new Vector3(health/maxHealth, 1f, 1f);
-        StartCoroutine(Flicker());
-        if (health <= 0f) {
-            health = 0f;
-            Die();
+        if (canTakeDamage) {
+            health -= damage;
+            healthBar.transform.localScale = new Vector3(health/maxHealth, 1f, 1f);
+            StartCoroutine(Flicker());
+            if (health <= 0f) {
+                health = 0f;
+                Die();
+            }
         }
-        //Healthbar update
     }
 
     private IEnumerator Flicker() {
@@ -141,12 +143,20 @@ public class PlayerScript : MonoBehaviour
 
     public void OnDash() {
         if (dashDelay <= 0f) {  
-            DashFX();
-            transform.Translate(movementNonZero * Time.deltaTime * dashDistance);
-            dashDelay = 0.2f;
+            StartCoroutine(Dash());
+            dashDelay = 0.5f;
         }
     }
 
+    private IEnumerator Dash() {
+        canTakeDamage = false;
+        for (int i = 0; i < 10; i++) {
+            DashFX();
+            transform.Translate(movementNonZero * Time.deltaTime * dashDistance/10);
+            yield return null;
+        }
+        canTakeDamage = true;
+    }
 
     private void DashFX() { // hopefully spawns dash sprite behind player character
         Vector2 dir = movementNonZero.normalized;
