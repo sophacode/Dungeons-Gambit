@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerScript : MonoBehaviour
 {
@@ -109,6 +111,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Die() {
         Debug.Log("DEAD");
+        SceneManager.LoadScene(2);
     }
 
     public void OnPause() {
@@ -138,7 +141,7 @@ public class PlayerScript : MonoBehaviour
         if (dashDelay <= 0f) {  
             DashFX();
             transform.Translate(movementNonZero * Time.deltaTime * dashDistance);
-            dashDelay = 0.5f;
+            dashDelay = 0.2f;
         }
     }
 
