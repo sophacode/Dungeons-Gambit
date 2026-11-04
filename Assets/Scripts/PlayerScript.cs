@@ -82,6 +82,7 @@ public class PlayerScript : MonoBehaviour
     public void TakeDamage(float damage) {
         if (canTakeDamage) {
             health -= damage;
+            AudioManager.Play(SoundEffect.PlayerHit);
             healthBar.transform.localScale = new Vector3(health/maxHealth, 1f, 1f);
             StartCoroutine(Flicker());
             if (health <= 0f) {
@@ -115,6 +116,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Die() {
         Debug.Log("DEAD");
+        AudioManager.Play(SoundEffect.PlayerDeath);
         SceneManager.LoadScene(2);
     }
 
@@ -188,6 +190,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnPromoteBishop() {
         Debug.Log("Attempting to promote to bishop");
+        AudioManager.Play(SoundEffect.PromotePiece);
         if (energy >= 3f) {
             Debug.Log("Promote");
             attack = 1;
@@ -199,6 +202,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnPromoteKnight() {
         Debug.Log("Attempting to promote to knight");
+        AudioManager.Play(SoundEffect.PromotePiece);
         if (energy >= 5f) {
             Debug.Log("Promote Knight");
             attack = 2;
@@ -210,6 +214,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnPromoteRook() {
         Debug.Log("Attempting to promote to rook");
+        AudioManager.Play(SoundEffect.PromotePiece);
         if (energy >= 10f) {
             Debug.Log("Promote Rook");
             attack = 3;
@@ -221,6 +226,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnPromoteQueen() {
         Debug.Log("Attempting to promote to queen");
+        AudioManager.Play(SoundEffect.PromotePiece);
         if (energy >= 20f) {
             Debug.Log("Promote Queen");
             attack = 4;
