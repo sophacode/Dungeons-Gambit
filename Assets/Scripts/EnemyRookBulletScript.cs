@@ -12,7 +12,7 @@ public class EnemyRookBulletScript : MonoBehaviour
 
     private void Awake()
     {
-        bulletSpeed = 2f;
+        bulletSpeed = 3f;
         bulletLife = 5f;
         canKill = true;
 

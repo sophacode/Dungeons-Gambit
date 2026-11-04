@@ -40,8 +40,8 @@ public class EnemyRookScript : MonoBehaviour
             shootDelay -= Time.deltaTime;
             if (navMeshAgent.remainingDistance <= 10 && shootDelay <= 0f) {
                 Vector3 direction = (target.transform.position - transform.position).normalized;
-                GameObject bullet = Instantiate(rookBullet, transform.position, Quaternion.identity);
-                bullet.GetComponent<EnemyRookBulletScript>().direction = direction;
+                GameObject bullet = Instantiate(rookBullet, transform.position, Quaternion.Euler(0,0,Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg));
+                bullet.GetComponent<EnemyRookBulletScript>().direction = Vector2.right;
                 shootDelay = 2f;
             }
         }

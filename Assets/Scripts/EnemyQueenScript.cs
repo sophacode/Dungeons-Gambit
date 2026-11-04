@@ -133,4 +133,12 @@ public class EnemyQueenScript : MonoBehaviour
         gameManager.enemiesAlive--;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().AddEnergy(energyValue);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.gameObject == target && damageDelay <= 0f) {
+            target.GetComponent<PlayerScript>().TakeDamage(2f);
+            damageDelay = 1f;
+        }
+    }
 }

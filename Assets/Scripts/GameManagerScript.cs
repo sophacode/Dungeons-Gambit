@@ -6,6 +6,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject enemyBishopPrefab;
     public GameObject enemyKnightPrefab;
     public GameObject enemyRookPrefab;
+    public GameObject queenBoss;
     private int wave;
     public int enemiesAlive;
     private int[][][] rooms;
@@ -85,6 +86,9 @@ public class GameManagerScript : MonoBehaviour
             }
             else if (i == 4) {
                 SpawnRandom(enemyRookPrefab).GetComponent<EnemyRookScript>().energyValue = 3;
+            }
+            else if (i == 5) {
+                Instantiate(queenBoss, new Vector3(0, 200, 0), Quaternion.identity);
             }
         }
     }

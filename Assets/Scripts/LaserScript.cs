@@ -18,7 +18,7 @@ public class LaserScript : MonoBehaviour
     private void Update()
     {
         transform.position = player.transform.position;
-        y += 0.05f;
+        y += 0.1f;
         transform.localScale = new Vector3(1, y, 1);
         life -= Time.deltaTime;
         if (life < 0f) {
