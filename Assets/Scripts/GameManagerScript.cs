@@ -1,3 +1,6 @@
+using System.Collections;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
@@ -21,6 +24,8 @@ public class GameManagerScript : MonoBehaviour
     public GameObject specialdoor;
     public GameObject pathway;
     public GameObject pathwayWalls;
+
+    public GameObject infoText;
 
     public void OnPause() {
         active = false;
@@ -115,6 +120,10 @@ public class GameManagerScript : MonoBehaviour
         pathwayWalls.SetActive(true);
         if (roomsCompleted >= 4) {
             specialdoor.SetActive(false);
+            StartCoroutine(FlashText("Click!\n(A door is unlocked somewhere)"));
+        }
+        else {
+            StartCoroutine(FlashText("Room Complete!"));
         }
     }
 
@@ -132,6 +141,7 @@ public class GameManagerScript : MonoBehaviour
         if (active && enemiesAlive <= 0) {
             if (wave < 3) {
                 Debug.Log("Wave Clear");
+                StartCoroutine(FlashText("Wave Clear!"));
                 wave ++;
                 SpawnEnemy();
             }
@@ -141,6 +151,13 @@ public class GameManagerScript : MonoBehaviour
                 RoomComplete();
             }
         }
+    }
+
+    private IEnumerator FlashText(string text) {
+        infoText.GetComponent<TextMeshProUGUI>().text = text;
+        infoText.SetActive(true);
+        yield return new WaitForSeconds(1);
+        infoText.SetActive(false);
     }
 
 }
