@@ -87,7 +87,10 @@ public class PlayerScript : MonoBehaviour
             StartCoroutine(Flicker());
             if (health <= 0f) {
                 health = 0f;
+                AudioManager.Play(SoundEffect.PlayerDeath);
                 Die();
+            } else if (health == 1f) {
+                AudioManager.Play(SoundEffect.PlayerLowHealth);
             }
         }
     }
@@ -255,6 +258,7 @@ public class PlayerScript : MonoBehaviour
             if (attack == 0) {
                 //Pawn attack
                 GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                AudioManager.Play(SoundEffect.BulletFire);
                 bulletScript bulletS = newBullet.GetComponent<bulletScript>();
                 bulletS.direction = direction;
                 bulletS.bulletSpeed = 5f;
@@ -276,11 +280,13 @@ public class PlayerScript : MonoBehaviour
             else if (attack == 2) {
                 //Kinght attack
                 GameObject melee = Instantiate(knightMeelee, transform.position, Quaternion.Euler(0,0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg));
+                AudioManager.Play(SoundEffect.MeleeAttack);
                 bulletShootDelay = 1f;
             }
             else if (attack == 3) {
                 //Rook attack
                 GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                AudioManager.Play(SoundEffect.BulletFire);
                 newBullet.transform.localScale = new Vector3(2f, 2f, 0f);
                 bulletScript bulletS = newBullet.GetComponent<bulletScript>();
                 bulletS.direction = direction;
