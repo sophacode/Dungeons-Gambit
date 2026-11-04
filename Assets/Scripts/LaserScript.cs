@@ -2,15 +2,34 @@ using UnityEngine;
 
 public class LaserScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private float life;
+    private bool canHit;
+    private GameObject player;
+
+    private void Awake()
     {
-        
+        life = 0.3f;
+        canHit = true;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        transform.position = player.transform.position;
+        life -= Time.deltaTime;
+        if (life < 0f) {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        string tag = other.gameObject.tag;
+        if (tag != "Player" && tag != "Bullet") {
+            if (tag == "Enemy" && canHit) {
+                other.GetComponent<EnemyHealth>().TakeDamage(3f);
+            }
+        }
+
     }
 }
