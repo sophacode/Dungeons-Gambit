@@ -4740,6 +4740,7 @@ MonoBehaviour:
   enemyBishopPrefab: {fileID: 6517828147163857576, guid: b60d9a93329b737fab47342f9d38c666, type: 3}
   enemyKnightPrefab: {fileID: 6517828147163857576, guid: 845e3663aca81653fad14c3f52ecd481, type: 3}
   enemyRookPrefab: {fileID: 6517828147163857576, guid: 00414fda4b4c03a00a808a76a8f7b472, type: 3}
+  queenBoss: {fileID: 0}
   enemiesAlive: 0
   roomCounter: 0
   active: 0

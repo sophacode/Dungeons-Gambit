@@ -11,12 +11,14 @@ public class GameManagerScript : MonoBehaviour
     public int enemiesAlive;
     private int[][][] rooms;
     public int roomCounter;
+    private int roomsCompleted;
     public bool active;
 
     private readonly int[] xBounds = new int[] {14, 14, -50, 78, 14};
     private readonly int[] yBounds = new int[] {14, 78, 78, 78, 132};
 
     public GameObject doors;
+    public GameObject specialdoor;
     public GameObject pathway;
     public GameObject pathwayWalls;
 
@@ -35,6 +37,7 @@ public class GameManagerScript : MonoBehaviour
         active = true;
 
         roomCounter = 1;
+        roomsCompleted = 0;
 
         //rooms -- 6 rooms,3 waves,x enemies
         //enemies -- 0 - none, 1 - pawn, 2 - bishop, 3 - knight, 4 - rook, 5 - queen
@@ -105,10 +108,14 @@ public class GameManagerScript : MonoBehaviour
     }
 
     private void RoomComplete() {
+        roomsCompleted += 1;
         Debug.Log("Complete");
         doors.SetActive(false);
         pathway.SetActive(true);
         pathwayWalls.SetActive(true);
+        if (roomsCompleted >= 4) {
+            specialdoor.SetActive(false);
+        }
     }
 
     public void EnterRoom(int room) {
