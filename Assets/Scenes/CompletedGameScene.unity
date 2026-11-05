@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 44836875}
   - component: {fileID: 44836874}
   - component: {fileID: 44836873}
+  - component: {fileID: 44836876}
   m_Layer: 5
   m_Name: Main menu
   m_TagString: Untagged
@@ -252,6 +253,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44836871}
   m_CullTransparentMesh: 1
+--- !u!114 &44836876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44836871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a692437fb9ad74d896045912f1a3b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FinalTimeScript
+  FinalTime: {fileID: 1108812123}
 --- !u!1 &49230121
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,7 +652,6 @@ GameObject:
   - component: {fileID: 1108812124}
   - component: {fileID: 1108812127}
   - component: {fileID: 1108812126}
-  - component: {fileID: 1108812125}
   m_Layer: 5
   m_Name: FinalTime
   m_TagString: Untagged
@@ -665,18 +678,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -222}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1108812125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108812123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88a692437fb9ad74d896045912f1a3b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!114 &1108812126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,8 +700,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Final Time: 00:00.0'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 438964329ec20d943876e4d55ff7ff84, type: 2}
-  m_sharedMaterial: {fileID: -5822960253095448100, guid: 438964329ec20d943876e4d55ff7ff84, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -17,9 +17,10 @@ public class EnemyQueenLaserScript : MonoBehaviour
 
     private IEnumerator Attack() {
         float a = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg + 90f;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
+            transform.rotation = Quaternion.Euler(new Vector3(1,1, a));
             transform.position = anchor.position;
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
         float b = a + 180f;
         for (int i = 0; i < 120; i++) {
