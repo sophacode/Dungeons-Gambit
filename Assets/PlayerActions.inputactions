@@ -250,6 +250,56 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "King",
+            "id": "90341664-81f4-4fe8-9bcc-131f07cad200",
+            "actions": [
+                {
+                    "name": "Enter",
+                    "type": "Button",
+                    "id": "835141d9-ab6d-4598-91b1-a4400abd4486",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "FirstPromote",
+                    "type": "Button",
+                    "id": "326956ab-2aeb-4b8f-8429-6e5637c18dba",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f78f27e1-5b46-48de-9bc9-3399d9769757",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Enter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d0fbb79d-6a2c-40e7-92b2-3b8079b94abf",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FirstPromote",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

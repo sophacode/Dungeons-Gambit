@@ -41,6 +41,12 @@ public class PlayerScript : MonoBehaviour
     public GameObject promotionBar;
     public GameObject promotionSprite;
 
+    private TutorialManagerScript king;
+    public bool canDash;
+    private bool firstDashDone;
+    public bool canShoot;
+    public bool canPromote;
+
     [SerializeField] GameObject pauseUIPanel;
     [SerializeField] GameObject healthBar;
 
@@ -57,7 +63,7 @@ public class PlayerScript : MonoBehaviour
 
         maxHealth = 10f;
         health = maxHealth;
-        canTakeDamage = true;
+        canTakeDamage = false;
 
         promotionTime = 0f;
 
@@ -65,6 +71,12 @@ public class PlayerScript : MonoBehaviour
         anim = GetComponent<Animator>();
         dashBlurSr = dashBlur.GetComponent<SpriteRenderer>();
         dashBlur.SetActive(false);
+
+        king = GameObject.FindGameObjectWithTag("Tutorial").GetComponent<TutorialManagerScript>();
+        canDash = false;
+        firstDashDone = false;
+        canShoot = false;
+        canPromote = false;
     }
 
     public void AddEnergy(float value) {
@@ -124,9 +136,23 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void OnPlay() {
+        Debug.Log("Player play");
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().OnPlay();
         GetComponent<PlayerInput>().SwitchCurrentActionMap("Movement");
         pauseUIPanel.SetActive(false);
+    }
+
+    public void OnEnter() {
+        king.HideKing();
+    }
+
+    public void OnFirstPromote() {
+        if (canPromote) {
+            Debug.Log("Here");
+            OnPlay();
+            OnPromoteBishop();
+            king.FirstPromotion();
+        }
     }
 
     public void OnMove(InputValue inputValue) {
@@ -141,7 +167,11 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void OnDash() {
-        if (dashDelay <= 0f) {  
+        if (dashDelay <= 0f && canDash) {  
+            if (!firstDashDone) {
+                firstDashDone = true;
+                king.FirstDash();
+            }
             StartCoroutine(Dash());
             dashDelay = 0.5f;
         }
@@ -174,7 +204,9 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void OnAttack() {
-        shooting = !shooting;
+        if (canShoot) {
+            shooting = !shooting;
+        }
     }
 
     private void UnPromote() {

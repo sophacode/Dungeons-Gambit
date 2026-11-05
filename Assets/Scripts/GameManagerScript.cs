@@ -16,7 +16,7 @@ public class GameManagerScript : MonoBehaviour
     public int roomCounter;
     private int roomsCompleted;
     public bool active;
-    private bool needToReactivate;
+    public bool needToReactivate;
 
     private readonly int[] xBounds = new int[] {14, 14, -50, 78, 14};
     private readonly int[] yBounds = new int[] {14, 78, 78, 78, 142};
@@ -28,6 +28,10 @@ public class GameManagerScript : MonoBehaviour
 
     public GameObject infoText;
 
+    public TutorialManagerScript king;
+    private bool firstEnemyKilled;
+    private bool secondWave;
+
     public void OnPause() {
         if (active) {
             active = false;
@@ -38,6 +42,7 @@ public class GameManagerScript : MonoBehaviour
     }
 
     public void OnPlay() {
+        Debug.Log("GameManager Play");
         if (needToReactivate) {
             active = true;
             needToReactivate = false;
@@ -87,6 +92,10 @@ public class GameManagerScript : MonoBehaviour
                 new int[] {5}
             }
         };
+
+        king = GameObject.FindGameObjectWithTag("Tutorial").GetComponent<TutorialManagerScript>();
+        firstEnemyKilled = false;
+        secondWave = false;
     }
 
 
@@ -152,6 +161,14 @@ public class GameManagerScript : MonoBehaviour
         if (active && enemiesAlive <= 0) {
             if (wave < 3) {
                 if (wave != 0) {
+                    if (!firstEnemyKilled) {
+                        firstEnemyKilled = true;
+                        king.FirstEnemyKilled();
+                    }
+                    else if (!secondWave) {
+                        secondWave = true;
+                        king.SecondWaveFinished();
+                    }
                     Debug.Log("Wave Clear");
                     StartCoroutine(FlashText("Wave Clear!"));
                 }
