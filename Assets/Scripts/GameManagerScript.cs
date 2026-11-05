@@ -168,6 +168,7 @@ public class GameManagerScript : MonoBehaviour
                 king.SecondRoomComplete();
             }
             player.health = 10f;
+            player.UpdateHealthBar();
         }
         roomsCompleted += 1;
         doors.SetActive(false);

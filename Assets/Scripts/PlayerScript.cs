@@ -132,7 +132,7 @@ public class PlayerScript : MonoBehaviour
         if (canTakeDamage) {
             health -= damage;
             AudioManager.Play(SoundEffect.PlayerHit);
-            healthBar.transform.localScale = new Vector3(health/maxHealth, 1f, 1f);
+            UpdateHealthBar();
             StartCoroutine(Flicker());
             StartCoroutine(Knockback(direction));
             if (health <= 0f) {
@@ -143,6 +143,10 @@ public class PlayerScript : MonoBehaviour
                 AudioManager.Play(SoundEffect.PlayerLowHealth);
             }
         }
+    }
+
+    public void UpdateHealthBar() {
+        healthBar.transform.localScale = new Vector3(health/maxHealth, 1f, 1f);
     }
 
     private IEnumerator Knockback(Vector2 dir) {
