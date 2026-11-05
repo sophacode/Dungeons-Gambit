@@ -81,6 +81,25 @@ public class PlayerScript : MonoBehaviour
         firstPromotion = false;
     }
 
+    public void FromBoss() {
+        transform.position = new Vector3(0, 160, 0);
+        canDash = true;
+        firstDashDone = true;
+        canShoot = true;
+        canPromote = true;
+        firstPromotion = true;
+        AddEnergy(20);
+
+    }
+
+    public void Speedrun() {
+        canDash = true;
+        firstDashDone = true;
+        canShoot = true;
+        canPromote = true;
+        firstPromotion = true;
+    }
+
     public void AddEnergy(float value) {
         energy += value;
         energyText.SetText("Energy: " + energy);
@@ -128,7 +147,12 @@ public class PlayerScript : MonoBehaviour
     private void Die() {
         Debug.Log("DEAD");
         AudioManager.Play(SoundEffect.PlayerDeath);
-        SceneManager.LoadScene(2);
+        if (!GlobalInfoScript.speedrun && GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().roomCounter == 6) {
+            SceneManager.LoadScene(3);
+        }
+        else {
+            SceneManager.LoadScene(2);
+        }
     }
 
     public void OnPause() {

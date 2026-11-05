@@ -8,6 +8,16 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void LoadGameBoss() {
+        GlobalInfoScript.fromBoss = true;
+        SceneManager.LoadScene(1);
+    }
+
+    public void LoadGameSpeedrun() {
+        GlobalInfoScript.speedrun = true;
+        SceneManager.LoadScene(1);
+    }
+
     public void LoadMain()
     {
         SceneManager.LoadScene(0);

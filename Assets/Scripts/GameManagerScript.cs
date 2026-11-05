@@ -95,6 +95,25 @@ public class GameManagerScript : MonoBehaviour
         king = GameObject.FindGameObjectWithTag("Tutorial").GetComponent<TutorialManagerScript>();
         firstEnemyKilled = false;
         secondWave = false;
+
+        if (GlobalInfoScript.fromBoss) {
+            firstEnemyKilled = true;
+            secondWave = true;
+            roomCounter = 6;
+            roomsCompleted = 5;
+            active = false;
+            pathway.SetActive(true);
+            pathwayWalls.SetActive(true);
+            doors.SetActive(false);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().FromBoss();
+        }
+        else if (GlobalInfoScript.speedrun) {
+            firstEnemyKilled = true;
+            secondWave = true;
+            roomCounter = 6;
+            roomsCompleted = 5;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().Speedrun();
+        }
     }
 
 

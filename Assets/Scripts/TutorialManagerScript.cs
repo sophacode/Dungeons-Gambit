@@ -60,7 +60,9 @@ public class TutorialManagerScript : MonoBehaviour
 
     private void Start()
     {
+        if (!GlobalInfoScript.speedrun && !GlobalInfoScript.fromBoss) {
         ShowKing("Welcome to Dungeons Gambit!\n Start by moving around with WASD");
+        }
     }
 
     private IEnumerator FirstEnemy() {

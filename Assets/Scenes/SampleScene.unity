@@ -443,7 +443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &178855599
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5321,6 +5321,8 @@ MonoBehaviour:
   pathwayWalls: {fileID: 1537359888}
   infoText: {fileID: 69596954}
   king: {fileID: 0}
+  firstEnemyKilled: 0
+  secondWave: 0
 --- !u!4 &846397257
 Transform:
   m_ObjectHideFlags: 0
@@ -5934,6 +5936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   kingSprite: {fileID: 178855598}
   speech: {fileID: 516150558}
+  waiting: 0
 --- !u!4 &1082044019
 Transform:
   m_ObjectHideFlags: 0
