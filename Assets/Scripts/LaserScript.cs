@@ -9,7 +9,7 @@ public class LaserScript : MonoBehaviour
 
     private void Awake()
     {
-        life = 0.3f;
+        life = 0.5f;
         canHit = true;
         player = GameObject.FindGameObjectWithTag("Player");
         y = 0f;

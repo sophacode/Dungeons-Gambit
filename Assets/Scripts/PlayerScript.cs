@@ -61,7 +61,7 @@ public class PlayerScript : MonoBehaviour
     private void Awake()
     {
         speed = 7;
-        dashDistance = 7;
+        dashDistance = 3;
 
         movementNonZero = new(0, 1);
         dashDelay = 0f;
