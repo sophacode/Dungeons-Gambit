@@ -43,6 +43,10 @@ public class PlayerScript : MonoBehaviour
     public GameObject promotionBar;
     public GameObject promotionSprite;
 
+    private int playerLayer;
+    private int enemyLayer;
+    private int bulletLayer;
+
     private TutorialManagerScript king;
     public bool canDash;
     private bool firstDashDone;
@@ -59,7 +63,7 @@ public class PlayerScript : MonoBehaviour
         movementNonZero = new(0, 1);
         dashDelay = 0f;
 
-        knockbackStrength = 7.5f;
+        knockbackStrength = 10f;
 
         bulletShootDelay = 0f;
         shooting = false;
@@ -78,6 +82,10 @@ public class PlayerScript : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
         dashBlurSr = dashBlur.GetComponent<SpriteRenderer>();
         dashBlur.SetActive(false);
+
+        playerLayer = LayerMask.NameToLayer("Player");
+        enemyLayer = LayerMask.NameToLayer("Enemy");
+        bulletLayer = LayerMask.NameToLayer("Bullet");
 
         king = GameObject.FindGameObjectWithTag("Tutorial").GetComponent<TutorialManagerScript>();
         canDash = false;
@@ -233,20 +241,16 @@ public class PlayerScript : MonoBehaviour
 
     private IEnumerator Dash() {
         canTakeDamage = false;
-        ChangeEnemyColliders(false);
+        Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, true);
+        Physics2D.IgnoreLayerCollision(playerLayer, bulletLayer, true);
         for (int i = 0; i < 10; i++) {
             DashFX();
             transform.Translate(movementNonZero * Time.deltaTime * dashDistance/10);
             yield return null;
         }
-        ChangeEnemyColliders(true);
+        Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, false);
+        Physics2D.IgnoreLayerCollision(playerLayer, bulletLayer, false);
         canTakeDamage = true;
-    }
-
-    private void ChangeEnemyColliders(bool b) {
-        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")) {
-            enemy.GetComponent<BoxCollider2D>().enabled = b;
-        }
     }
 
     private void DashFX() { // hopefully spawns dash sprite behind player character

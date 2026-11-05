@@ -593,7 +593,7 @@ GameObject:
   - component: {fileID: 230834146}
   - component: {fileID: 230834147}
   - component: {fileID: 230834148}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -721,6 +721,7 @@ MonoBehaviour:
   speed: 5
   dashDistance: 67
   collider: {fileID: 0}
+  knockbackStrength: 0
   bullet: {fileID: 2846969314011449836, guid: c2b702e2a4974bf31bebf171ba53dbd3, type: 3}
   bulletShootDelay: 0
   shooting: 0
@@ -4774,7 +4775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 646414893}
   - component: {fileID: 646414894}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: dashblur
   m_TagString: Untagged
   m_Icon: {fileID: 0}

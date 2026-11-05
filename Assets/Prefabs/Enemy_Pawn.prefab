@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -6713296035484918050}
   - component: {fileID: -4239453851762830871}
   - component: {fileID: 7731925804708674976}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy_Pawn
   m_TagString: Enemy
   m_Icon: {fileID: 0}
