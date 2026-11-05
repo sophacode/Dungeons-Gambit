@@ -45,7 +45,7 @@ public class bulletScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         string tag = other.gameObject.tag;
-        if (tag != "Player" && tag != "Bullet") {
+        if (tag != "Player" && tag != "Bullet" && tag != "Trigger") {
             if (tag == "Enemy" && canHit) {
                 other.GetComponent<EnemyHealth>().TakeDamage(damage);
                 canHit = false;

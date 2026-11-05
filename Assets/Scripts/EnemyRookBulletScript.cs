@@ -43,7 +43,7 @@ public class EnemyRookBulletScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         string tag = other.gameObject.tag;
-        if (tag != "Bullet" && tag != "Enemy") {
+        if (tag != "Bullet" && tag != "Enemy" && tag != "Trigger") {
             if (tag == "Player" && canKill) {
                 player.TakeDamage(2f, new(direction.x, direction.y));
                 canKill = false;

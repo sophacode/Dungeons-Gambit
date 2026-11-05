@@ -10,6 +10,7 @@ TagManager:
   - Tutorial
   - Timer
   - Queen
+  - Trigger
   layers:
   - Default
   - TransparentFX
