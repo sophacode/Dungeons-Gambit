@@ -61,7 +61,7 @@ public class PlayerScript : MonoBehaviour
     private void Awake()
     {
         speed = 7;
-        dashDistance = 60;
+        dashDistance = 7;
 
         movementNonZero = new(0, 1);
         dashDelay = 0f;
@@ -252,7 +252,7 @@ public class PlayerScript : MonoBehaviour
         Physics2D.IgnoreLayerCollision(playerLayer, bulletLayer, true);
         for (int i = 0; i < 10; i++) {
             DashFX();
-            transform.Translate(movementNonZero * Time.deltaTime * dashDistance/10);
+            transform.Translate(movementNonZero * dashDistance/10);
             yield return null;
         }
         Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, false);

@@ -15,7 +15,7 @@ public class LaserScript : MonoBehaviour
         y = 0f;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         transform.position = player.transform.position;
         y += 0.1f;
