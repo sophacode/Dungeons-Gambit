@@ -18,7 +18,7 @@ public class PlayerScript : MonoBehaviour
     private int attack;
     public GameObject bullet;
     public float bulletShootDelay;
-    private bool shooting;
+    public bool shooting;
     public GameObject knightMeelee;
     public GameObject laser;
 
@@ -31,7 +31,6 @@ public class PlayerScript : MonoBehaviour
 
     private SpriteRenderer sr;
     public Sprite[] pieceSprites;
-    public GameObject[] pieceUIBacks;
     public GameObject dashBlur;
     private SpriteRenderer dashBlurSr;
 
@@ -39,6 +38,8 @@ public class PlayerScript : MonoBehaviour
     public UIswitching uilogic;
 
     private float promotionTime;
+    public GameObject promotionBar;
+    public GameObject promotionSprite;
 
     [SerializeField] GameObject pauseUIPanel;
     [SerializeField] GameObject healthBar;
@@ -64,13 +65,6 @@ public class PlayerScript : MonoBehaviour
         anim = GetComponent<Animator>();
         dashBlurSr = dashBlur.GetComponent<SpriteRenderer>();
         dashBlur.SetActive(false);
-    }
-
-    private void SetPieceBack(int i) {
-        foreach (GameObject g in pieceUIBacks) {
-            g.SetActive(false);
-        }
-        pieceUIBacks[i].SetActive(true);
     }
 
     public void AddEnergy(float value) {
@@ -189,6 +183,8 @@ public class PlayerScript : MonoBehaviour
         anim.SetBool("Walking", false);
         anim.SetTrigger("Unpromote");
         sr.sprite = pieceSprites[0];
+        promotionSprite.GetComponent<Image>().sprite = pieceSprites[0];
+        promotionBar.transform.localScale = new(1, 1, 1);
     }
 
     public void OnPromoteBishop() {
@@ -200,6 +196,7 @@ public class PlayerScript : MonoBehaviour
             AddEnergy(-3);
             anim.SetTrigger("PromoteBishop");
             promotionTime = 10f;
+            promotionSprite.GetComponent<Image>().sprite = pieceSprites[1];
         }
     }
 
@@ -212,6 +209,7 @@ public class PlayerScript : MonoBehaviour
             AddEnergy(-5);
             anim.SetTrigger("PromoteKnight");
             promotionTime = 10f;
+            promotionSprite.GetComponent<Image>().sprite = pieceSprites[2];
         }
     }
 
@@ -224,6 +222,7 @@ public class PlayerScript : MonoBehaviour
             AddEnergy(-10);
             anim.SetTrigger("PromoteRook");
             promotionTime = 10f;
+            promotionSprite.GetComponent<Image>().sprite = pieceSprites[3];
         }
     }
 
@@ -236,6 +235,7 @@ public class PlayerScript : MonoBehaviour
             AddEnergy(-20);
             anim.SetTrigger("PromoteQueen");
             promotionTime = 10f;
+            promotionSprite.GetComponent<Image>().sprite = pieceSprites[4];
         }
     }
 
@@ -249,6 +249,9 @@ public class PlayerScript : MonoBehaviour
         promotionTime -= Time.deltaTime;
         if (attack != 0 && promotionTime <= 0f) {
             UnPromote();
+        }
+        else if (promotionTime >= 0) {
+            promotionBar.transform.localScale = new(promotionTime/10f, 1, 1);
         }
 
         if(shooting && bulletShootDelay < 0f) {

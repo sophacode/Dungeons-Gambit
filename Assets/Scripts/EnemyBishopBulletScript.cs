@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyBishopBulletScript : MonoBehaviour
 {
     public float bulletSpeed;
+    private float currentSpeed;
     public Vector3 direction;
     private float bulletLife;
     private bool canKill;
@@ -13,6 +14,7 @@ public class EnemyBishopBulletScript : MonoBehaviour
     private void Awake()
     {
         bulletSpeed = 5f;
+        currentSpeed = bulletSpeed;
         bulletLife = 3f;
         canKill = true;
 
@@ -21,9 +23,17 @@ public class EnemyBishopBulletScript : MonoBehaviour
 
     }
 
+    public void PauseBullet() {
+        currentSpeed = 0f;
+    }
+
+    public void ResetSpeed() {
+        currentSpeed = bulletSpeed;
+    }
+
     private void Update()
     {
-        transform.Translate(direction * Time.deltaTime * bulletSpeed);
+        transform.Translate(direction * Time.deltaTime * currentSpeed);
         bulletLife -= Time.deltaTime;
         if (bulletLife < 0) {
             Destroy(gameObject);

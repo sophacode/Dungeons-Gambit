@@ -3,6 +3,7 @@ using UnityEngine;
 public class bulletScript : MonoBehaviour
 {
     public float bulletSpeed;
+    private float currentSpeed;
     public Vector3 direction;
     private float bulletLife;
     private bool canHit;
@@ -15,6 +16,7 @@ public class bulletScript : MonoBehaviour
     private void Awake()
     {
         bulletSpeed = 5f;
+        currentSpeed = bulletSpeed;
         bulletLife = 1.5f;
         canHit = true;
 
@@ -23,9 +25,17 @@ public class bulletScript : MonoBehaviour
 
     }
 
+    public void PauseBullet() {
+        currentSpeed = 0f;
+    }
+
+    public void ResetSpeed() {
+        currentSpeed = bulletSpeed;
+    }
+
     private void Update()
     {
-        transform.Translate(direction * Time.deltaTime * bulletSpeed);
+        transform.Translate(direction * Time.deltaTime * currentSpeed);
         bulletLife -= Time.deltaTime;
         if (bulletLife < 0) {
             Destroy(gameObject);

@@ -29,10 +29,27 @@ public class GameManagerScript : MonoBehaviour
 
     public void OnPause() {
         active = false;
+        Time.timeScale = 0f;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().shooting = false;
+        /*
+        foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet")) {
+            if (bullet.TryGetComponent<bulletScript>(out bulletScript b)) { b.PauseBullet(); }
+            if (bullet.TryGetComponent<EnemyBishopBulletScript>(out EnemyBishopBulletScript bb)) { bb.PauseBullet(); }
+            if (bullet.TryGetComponent<EnemyRookBulletScript>(out EnemyRookBulletScript bbb)) { bbb.PauseBullet(); }
+        }
+        */
     }
 
     public void OnPlay() {
         active = true;
+        Time.timeScale = 1f;
+        /*
+        foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet")) {
+            if (bullet.TryGetComponent<bulletScript>(out bulletScript b)) { b.ResetSpeed(); }
+            if (bullet.TryGetComponent<EnemyBishopBulletScript>(out EnemyBishopBulletScript bb)) { bb.ResetSpeed(); }
+            if (bullet.TryGetComponent<EnemyRookBulletScript>(out EnemyRookBulletScript bbb)) { bbb.ResetSpeed(); }
+        }
+        */
     }
 
     private void Awake()

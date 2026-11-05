@@ -181,3 +181,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   targetDirection: {x: 0, y: 0}
+  anchor: {fileID: 0}
