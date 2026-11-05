@@ -50,6 +50,9 @@ public class EnemyRookBulletScript : MonoBehaviour
             }
             Destroy(gameObject);
         }
+        else if (tag == "Bullet") {
+            Destroy(other.gameObject);
+        }
 
     }
 }

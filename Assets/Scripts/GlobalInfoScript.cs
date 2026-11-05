@@ -6,6 +6,7 @@ public class GlobalInfoScript : MonoBehaviour
 
     public static bool speedrun = false;
     public static bool fromBoss = false;
+    public static float finalTime = 0f;
 
 
     private void Awake()

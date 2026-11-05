@@ -23,7 +23,7 @@ public class TimerScript : MonoBehaviour
         int seconds = Mathf.FloorToInt(t % 60f);
         int milliseconds = Mathf.FloorToInt((t * 100f) % 100f);
 
-        return string.Format("{0:00}:{1:00}.{2:0}", minutes, seconds, milliseconds);
+        return string.Format("{0:00}:{1:00}.{2:00}", minutes, seconds, milliseconds);
 
     }
 }

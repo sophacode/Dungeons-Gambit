@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject enemyKnightPrefab;
     public GameObject enemyRookPrefab;
     public GameObject queenBoss;
+    public GameObject queenBossBar;
     private int wave;
     public int enemiesAlive;
     private int[][][] rooms;
@@ -139,6 +141,7 @@ public class GameManagerScript : MonoBehaviour
             }
             else if (i == 5) {
                 Instantiate(queenBoss, new Vector3(0, 200, 0), Quaternion.identity);
+                queenBossBar.SetActive(true);
             }
         }
     }
@@ -167,7 +170,9 @@ public class GameManagerScript : MonoBehaviour
         pathwayWalls.SetActive(true);
         if (roomsCompleted == 4) {
             specialdoor.SetActive(false);
-            king.Click();
+            if (!GlobalInfoScript.speedrun) {
+                king.Click();
+            }
             StartCoroutine(FlashText("Click!\n(A door is unlocked somewhere)"));
         }
         else {
@@ -233,6 +238,20 @@ public class GameManagerScript : MonoBehaviour
         infoText.SetActive(true);
         yield return new WaitForSeconds(1);
         infoText.SetActive(false);
+    }
+
+    public void Win() {
+        active = false;
+        FlashText("Victory!");
+        StartCoroutine(EndDelay());
+    }
+
+    private IEnumerator EndDelay() {
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")) {
+            Destroy(enemy);
+        }
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(4);
     }
 
 }

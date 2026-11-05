@@ -61,7 +61,11 @@ public class TutorialManagerScript : MonoBehaviour
     private void Start()
     {
         if (!GlobalInfoScript.speedrun && !GlobalInfoScript.fromBoss) {
-        ShowKing("Welcome to Dungeons Gambit!\n Start by moving around with WASD");
+            ShowKing("Welcome to Dungeons Gambit!\n Start by moving around with WASD");
+        }
+        if (GlobalInfoScript.fromBoss) {
+            first = true;
+            ShowKing("She's tough to beat so I'll let you have another try!");
         }
     }
 

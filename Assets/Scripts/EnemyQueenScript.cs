@@ -24,6 +24,8 @@ public class EnemyQueenScript : MonoBehaviour
     public GameObject bullet;
     public GameObject pawn;
 
+    public GameObject bossHealthBar;
+
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -37,9 +39,15 @@ public class EnemyQueenScript : MonoBehaviour
         attackCooldown = 3f;
     }
 
+    private void Start()
+    {
+        bossHealthBar = GameObject.FindGameObjectWithTag("Queen");
+    }
+
     private void Update()
     {
         if (healthScript.alive && gameManager.active) {
+            bossHealthBar.transform.localScale = new(healthScript.health / healthScript.maxHealth, 1, 1);
             navMeshAgent.isStopped = false;
             navMeshAgent.destination = target.transform.position;
             attackCooldown -= Time.deltaTime;
@@ -131,7 +139,12 @@ public class EnemyQueenScript : MonoBehaviour
     private void OnDestroy()
     {
         gameManager.enemiesAlive--;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().AddEnergy(energyValue);
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().health > 0f) {
+            if (GlobalInfoScript.speedrun) {
+                GlobalInfoScript.finalTime = GameObject.FindGameObjectWithTag("Timer").GetComponent<TimerScript>().time;
+            }
+            gameManager.Win();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

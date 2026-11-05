@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
     public int speed;
     public int dashDistance;
     private float dashDelay;
+    public BoxCollider2D collider;
 
     private int attack;
     public GameObject bullet;
@@ -70,6 +71,7 @@ public class PlayerScript : MonoBehaviour
 
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        collider = GetComponent<BoxCollider2D>();
         dashBlurSr = dashBlur.GetComponent<SpriteRenderer>();
         dashBlur.SetActive(false);
 
@@ -213,12 +215,14 @@ public class PlayerScript : MonoBehaviour
 
     private IEnumerator Dash() {
         canTakeDamage = false;
+        collider.enabled = false;
         for (int i = 0; i < 10; i++) {
             DashFX();
             transform.Translate(movementNonZero * Time.deltaTime * dashDistance/10);
             yield return null;
         }
         canTakeDamage = true;
+        collider.enabled = true;
     }
 
     private void DashFX() { // hopefully spawns dash sprite behind player character

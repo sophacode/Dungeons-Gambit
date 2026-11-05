@@ -8,6 +8,8 @@ TagManager:
   - GameManager
   - Bullet
   - Tutorial
+  - Timer
+  - Queen
   layers:
   - Default
   - TransparentFX
