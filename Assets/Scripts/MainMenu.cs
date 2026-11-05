@@ -13,6 +13,12 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void LoadGameBossFromMainMenu() {
+        GlobalInfoScript.fromBoss = true;
+        GlobalInfoScript.fromMainMenu = true;
+        SceneManager.LoadScene(1);
+    }
+
     public void LoadGameSpeedrun() {
         GlobalInfoScript.speedrun = true;
         SceneManager.LoadScene(1);
@@ -20,6 +26,9 @@ public class MainMenu : MonoBehaviour
 
     public void LoadMain()
     {
+        GlobalInfoScript.speedrun = false;
+        GlobalInfoScript.fromBoss = false;
+        GlobalInfoScript.fromMainMenu = false;
         SceneManager.LoadScene(0);
     }
 

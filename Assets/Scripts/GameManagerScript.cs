@@ -12,6 +12,8 @@ public class GameManagerScript : MonoBehaviour
     public GameObject enemyRookPrefab;
     public GameObject queenBoss;
     public GameObject queenBossBar;
+    private PlayerScript player;
+
     private int wave;
     public int enemiesAlive;
     private int[][][] rooms;
@@ -42,7 +44,7 @@ public class GameManagerScript : MonoBehaviour
             needToReactivate = true;
         }
         Time.timeScale = 0f;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().shooting = false;
+        player.shooting = false;
     }
 
     public void OnPlay() {
@@ -59,6 +61,8 @@ public class GameManagerScript : MonoBehaviour
         enemiesAlive = 0;
         active = true;
         needToReactivate = false;
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
 
         roomCounter = 1;
         roomsCompleted = 0;
@@ -109,12 +113,12 @@ public class GameManagerScript : MonoBehaviour
             pathway.SetActive(true);
             pathwayWalls.SetActive(true);
             doors.SetActive(false);
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().FromBoss();
+            player.FromBoss();
         }
         else if (GlobalInfoScript.speedrun) {
             firstEnemyKilled = true;
             secondWave = true;
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().Speedrun();
+            player.Speedrun();
             Timer.SetActive(true);
         }
         else {
@@ -162,6 +166,7 @@ public class GameManagerScript : MonoBehaviour
             if (roomCounter == 2) {
                 king.SecondRoomComplete();
             }
+            player.health = 10f;
         }
         roomsCompleted += 1;
         doors.SetActive(false);
@@ -191,7 +196,7 @@ public class GameManagerScript : MonoBehaviour
                 king.EnterFourthRoom();
             }
         }
-        
+
         roomCounter = room;
         doors.SetActive(true);
         pathway.SetActive(false);

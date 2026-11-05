@@ -67,7 +67,12 @@ public class TutorialManagerScript : MonoBehaviour
         }
         if (GlobalInfoScript.fromBoss) {
             first = true;
-            ShowKing("She's tough to beat so I'll let you have another try!");
+            if (GlobalInfoScript.fromMainMenu) {
+                ShowKing("Welcome to Dungeons Gambit!\nGive this boss your best shot!");
+            }
+            else {
+                ShowKing("She's tough to beat so I'll let you have another try!");
+            }
         }
     }
 
