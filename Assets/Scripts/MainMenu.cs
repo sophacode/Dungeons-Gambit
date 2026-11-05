@@ -42,6 +42,15 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
+    public void Restart() {
+        if (GlobalInfoScript.speedrun) {
+            LoadGameSpeedrun();
+        }
+        else {
+            LoadGame();
+        }
+    }
+
     public void Quit() {
         Application.Quit();
     }
