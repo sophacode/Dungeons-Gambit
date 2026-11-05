@@ -45,7 +45,7 @@ public class EnemyRookBulletScript : MonoBehaviour
         string tag = other.gameObject.tag;
         if (tag != "Bullet" && tag != "Enemy") {
             if (tag == "Player" && canKill) {
-                player.TakeDamage(2f);
+                player.TakeDamage(2f, new(direction.x, direction.y));
                 canKill = false;
             }
             Destroy(gameObject);

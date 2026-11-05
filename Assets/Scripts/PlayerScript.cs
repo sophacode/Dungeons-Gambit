@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour
     public int dashDistance;
     private float dashDelay;
     public BoxCollider2D collider;
+    public float knockbackStrength;
 
     private int attack;
     public GameObject bullet;
@@ -58,6 +59,8 @@ public class PlayerScript : MonoBehaviour
         movementNonZero = new(0, 1);
         dashDelay = 0f;
 
+        knockbackStrength = 7.5f;
+
         bulletShootDelay = 0f;
         shooting = false;
         attack = 0;
@@ -93,6 +96,7 @@ public class PlayerScript : MonoBehaviour
         canPromote = true;
         canPromoteRook = true;
         firstPromotion = true;
+        canTakeDamage = true;
         AddEnergy(20);
 
     }
@@ -104,6 +108,7 @@ public class PlayerScript : MonoBehaviour
         canPromote = true;
         canPromoteRook = true;
         firstPromotion = true;
+        canTakeDamage = true;
     }
 
     public void AddEnergy(float value) {
@@ -112,12 +117,13 @@ public class PlayerScript : MonoBehaviour
         uilogic.updatePieceFills(energy);
     }
 
-    public void TakeDamage(float damage) {
+    public void TakeDamage(float damage, Vector2 direction) {
         if (canTakeDamage) {
             health -= damage;
             AudioManager.Play(SoundEffect.PlayerHit);
             healthBar.transform.localScale = new Vector3(health/maxHealth, 1f, 1f);
             StartCoroutine(Flicker());
+            StartCoroutine(Knockback(direction));
             if (health <= 0f) {
                 health = 0f;
                 AudioManager.Play(SoundEffect.PlayerDeath);
@@ -125,6 +131,13 @@ public class PlayerScript : MonoBehaviour
             } else if (health == 3f) {
                 AudioManager.Play(SoundEffect.PlayerLowHealth);
             }
+        }
+    }
+
+    private IEnumerator Knockback(Vector2 dir) {
+        for (int i = 0; i < 5; i++) {
+            transform.Translate(dir * Time.deltaTime * knockbackStrength);
+            yield return null;
         }
     }
 
@@ -220,14 +233,20 @@ public class PlayerScript : MonoBehaviour
 
     private IEnumerator Dash() {
         canTakeDamage = false;
-        collider.enabled = false;
+        ChangeEnemyColliders(false);
         for (int i = 0; i < 10; i++) {
             DashFX();
             transform.Translate(movementNonZero * Time.deltaTime * dashDistance/10);
             yield return null;
         }
+        ChangeEnemyColliders(true);
         canTakeDamage = true;
-        collider.enabled = true;
+    }
+
+    private void ChangeEnemyColliders(bool b) {
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")) {
+            enemy.GetComponent<BoxCollider2D>().enabled = b;
+        }
     }
 
     private void DashFX() { // hopefully spawns dash sprite behind player character

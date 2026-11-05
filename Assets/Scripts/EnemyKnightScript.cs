@@ -48,8 +48,8 @@ public class EnemyKnightScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.gameObject == target && damageDelay <= 0f) {
-            target.GetComponent<PlayerScript>().TakeDamage(2f);
-            damageDelay = 1.5f;
+            target.GetComponent<PlayerScript>().TakeDamage(2f, navMeshAgent.velocity.normalized);
+            damageDelay = 0.5f;
         }
     }
 }

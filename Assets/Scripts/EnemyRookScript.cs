@@ -61,7 +61,7 @@ public class EnemyRookScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.gameObject == target && damageDelay <= 0f) {
-            target.GetComponent<PlayerScript>().TakeDamage(2f);
+            target.GetComponent<PlayerScript>().TakeDamage(2f, navMeshAgent.velocity.normalized);
             damageDelay = 1f;
         }
     }

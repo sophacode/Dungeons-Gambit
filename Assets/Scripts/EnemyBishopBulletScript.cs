@@ -45,7 +45,7 @@ public class EnemyBishopBulletScript : MonoBehaviour
         string tag = other.gameObject.tag;
         if (tag != "Bullet" && tag != "Enemy") {
             if (tag == "Player" && canKill) {
-                player.TakeDamage(1f);
+                player.TakeDamage(1f, new(direction.x, direction.y));
                 canKill = false;
             }
             Destroy(gameObject);

@@ -48,8 +48,8 @@ public class EnemyScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.gameObject == target && damageDelay <= 0f) {
-            target.GetComponent<PlayerScript>().TakeDamage(1f);
-            damageDelay = 1f;
+            target.GetComponent<PlayerScript>().TakeDamage(1f, navMeshAgent.velocity.normalized);
+            damageDelay = 0.5f;
         }
     }
 
