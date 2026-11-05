@@ -47,6 +47,7 @@ public class PlayerScript : MonoBehaviour
     private bool firstDashDone;
     public bool canShoot;
     public bool canPromote;
+    public bool canPromoteRook;
     private bool firstPromotion;
 
     [SerializeField] GameObject pauseUIPanel;
@@ -80,6 +81,7 @@ public class PlayerScript : MonoBehaviour
         firstDashDone = false;
         canShoot = false;
         canPromote = false;
+        canPromoteRook = false;
         firstPromotion = false;
     }
 
@@ -89,6 +91,7 @@ public class PlayerScript : MonoBehaviour
         firstDashDone = true;
         canShoot = true;
         canPromote = true;
+        canPromoteRook = true;
         firstPromotion = true;
         AddEnergy(20);
 
@@ -99,6 +102,7 @@ public class PlayerScript : MonoBehaviour
         firstDashDone = true;
         canShoot = true;
         canPromote = true;
+        canPromoteRook = true;
         firstPromotion = true;
     }
 
@@ -179,6 +183,7 @@ public class PlayerScript : MonoBehaviour
             OnPromoteBishop();
             king.FirstPromotion();
             canPromote = false;
+            king.hintText.SetActive(false);
         }
     }
 
@@ -187,6 +192,7 @@ public class PlayerScript : MonoBehaviour
             OnPlay();
             OnPromoteKnight();
             king.waiting = false;
+            king.hintText.SetActive(false);
         }
     }
 
@@ -278,7 +284,7 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void OnPromoteRook() {
-        if (energy >= 10f && canPromote) {
+        if (energy >= 10f && canPromote && canPromoteRook) {
             attack = 3;
             AddEnergy(-10);
             anim.SetTrigger("PromoteRook");

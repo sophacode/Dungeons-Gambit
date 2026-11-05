@@ -13,6 +13,7 @@ public class TutorialManagerScript : MonoBehaviour
 
     public GameObject kingSprite;
     public GameObject speech;
+    public GameObject hintText;
 
     private bool first;
     private bool second;
@@ -54,6 +55,7 @@ public class TutorialManagerScript : MonoBehaviour
                 gameManager.OnPause();
                 player.GetComponent<PlayerInput>().SwitchCurrentActionMap("King");
                 playerScript.canPromote = true;
+                hintText.SetActive(true);
             }
         }
     }
@@ -72,7 +74,7 @@ public class TutorialManagerScript : MonoBehaviour
     private IEnumerator FirstEnemy() {
         yield return new WaitForSeconds(3);
         playerScript.canDash = true;
-        ShowKing("Watch out, here comes an enemy pawn!\nTry using SHIFT to dash away from the enemy!");
+        ShowKing("Watch out, here comes an enemy pawn!\nTry using SHIFT to dash away from the enemy!\n(You can't take damage while dashing)");
     }
 
     public void FirstDash() {
@@ -81,7 +83,7 @@ public class TutorialManagerScript : MonoBehaviour
 
     private IEnumerator FirstDashDelay() {
         yield return new WaitForSeconds(0.5f);
-        ShowKing("Good Job!\nNow try using SPACE to shoot at the enemy while using your mouse to aim!");
+        ShowKing("Good Job!\nNow try using SPACE to shoot at the enemy while using your mouse to aim!\n(You can hold down SPACE to auto-fire)");
         playerScript.canShoot = true;
     }
 
@@ -97,6 +99,7 @@ public class TutorialManagerScript : MonoBehaviour
     private IEnumerator SecondWaveFinishedDelay() {
         yield return new WaitForSeconds(0.5f);
         ShowKing("You now have enough energy to PROMOTE\nYou can promote to different pieces for different abilities!\nPress 1 to promote to a Bishop for the cost of 3 energy!");
+        hintText.GetComponent<TextMeshProUGUI>().text = "Hint: Press 1 to promote to a Bishop";
         second = false;
         gameManager.infoText.SetActive(false);
     }
@@ -128,6 +131,7 @@ public class TutorialManagerScript : MonoBehaviour
     private IEnumerator FirstBishopKilledDelay() {
         yield return new WaitForSeconds(1);
         ShowKing("The Knight promotion gives you a melee attack that can destroy bullets\nPress 2 to promote to a knight for 5 energy!");
+        hintText.GetComponent<TextMeshProUGUI>().text = "Hint: Press 2 to promote to a Knight";
         second = false;
         gameManager.infoText.SetActive(false);
     }
@@ -139,6 +143,7 @@ public class TutorialManagerScript : MonoBehaviour
     private IEnumerator SecondRoomCompleteDelay() {
         yield return new WaitForSeconds(0.5f);
         gameManager.infoText.SetActive(false);
+        playerScript.canPromoteRook = true;
         ShowKing("Nicely done! Clear a couple more rooms to the side and you'll be able to continue up\nYou can now promote to a Rook and Queen for 10 and 20 energy respecively.");
     }
 
