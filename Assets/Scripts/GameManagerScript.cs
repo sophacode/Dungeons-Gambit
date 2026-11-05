@@ -29,8 +29,8 @@ public class GameManagerScript : MonoBehaviour
     public GameObject infoText;
 
     public TutorialManagerScript king;
-    private bool firstEnemyKilled;
-    private bool secondWave;
+    public bool firstEnemyKilled;
+    public bool secondWave;
 
     public void OnPause() {
         if (active) {
@@ -42,7 +42,6 @@ public class GameManagerScript : MonoBehaviour
     }
 
     public void OnPlay() {
-        Debug.Log("GameManager Play");
         if (needToReactivate) {
             active = true;
             needToReactivate = false;
@@ -133,6 +132,9 @@ public class GameManagerScript : MonoBehaviour
     }
 
     private void RoomComplete() {
+        if (roomCounter == 2) {
+            king.SecondRoomComplete();
+        }
         roomsCompleted += 1;
         Debug.Log("Complete");
         doors.SetActive(false);
@@ -140,6 +142,7 @@ public class GameManagerScript : MonoBehaviour
         pathwayWalls.SetActive(true);
         if (roomsCompleted == 4) {
             specialdoor.SetActive(false);
+            king.Click();
             StartCoroutine(FlashText("Click!\n(A door is unlocked somewhere)"));
         }
         else {
@@ -148,6 +151,15 @@ public class GameManagerScript : MonoBehaviour
     }
 
     public void EnterRoom(int room) {
+        if (room == 2) {
+            king.EnterSecondRoom();
+        }
+        else if (room == 3) {
+            king.EnterThirdRoom();
+        }
+        else if (room == 4) {
+            king.EnterFourthRoom();
+        }
         roomCounter = room;
         doors.SetActive(true);
         pathway.SetActive(false);
@@ -163,7 +175,12 @@ public class GameManagerScript : MonoBehaviour
                 if (wave != 0) {
                     if (!firstEnemyKilled) {
                         firstEnemyKilled = true;
-                        king.FirstEnemyKilled();
+                        if (roomCounter == 1) {
+                            king.FirstEnemyKilled();
+                        }
+                        else {
+                            king.FirstBishopKilled();
+                        }
                     }
                     else if (!secondWave) {
                         secondWave = true;

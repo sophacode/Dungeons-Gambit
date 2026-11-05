@@ -16,7 +16,7 @@ public class TutorialManagerScript : MonoBehaviour
 
     private bool first;
     private bool second;
-    private bool waiting;
+    public bool waiting;
 
     private void Awake()
     {
@@ -90,7 +90,7 @@ public class TutorialManagerScript : MonoBehaviour
 
     private IEnumerator SecondWaveFinishedDelay() {
         yield return new WaitForSeconds(0.5f);
-        ShowKing("You now have enough energy to PROMOTE\nPress 1 to promote to a Bishop for the cost of 3 energy!");
+        ShowKing("You now have enough energy to PROMOTE\nYou can promote to different pieces for different abilities!\nPress 1 to promote to a Bishop for the cost of 3 energy!");
         second = false;
         gameManager.infoText.SetActive(false);
     }
@@ -101,8 +101,66 @@ public class TutorialManagerScript : MonoBehaviour
 
     private IEnumerator FirstPromotionDelay() {
         yield return new WaitForSeconds(0.5f);
-        ShowKing("Nice! Every promotion lasts 10 seconds which is shown by the green bar in the top left\nFinish off these enemies and continue to the next room!");
+        ShowKing("Nice! Every promotion lasts 10 seconds which is shown by the green bar in the top left and their buttons are shown on the right.\nFinish off these enemies and continue up to the next room!");
         waiting = false;
+    }
+
+    public void EnterSecondRoom() {
+        StartCoroutine(SecondRoomDelay());
+    }
+
+    private IEnumerator SecondRoomDelay() {
+        yield return new WaitForSeconds(2);
+        ShowKing("Watch out for the bishop! Once it's in range of you it will shoot out bullets so try and dodge them and take it out!");
+        gameManager.firstEnemyKilled = false;
+    }
+
+    public void FirstBishopKilled() {
+        StartCoroutine(FirstBishopKilledDelay());
+    }
+
+    private IEnumerator FirstBishopKilledDelay() {
+        yield return new WaitForSeconds(1);
+        ShowKing("The Knight promotion gives you a melee attack that can destroy bullets\nPress 2 to promote to a knight for 5 energy!");
+        second = false;
+        gameManager.infoText.SetActive(false);
+    }
+
+    public void SecondRoomComplete() {
+        StartCoroutine(SecondRoomCompleteDelay());
+    }
+
+    private IEnumerator SecondRoomCompleteDelay() {
+        yield return new WaitForSeconds(0.5f);
+        gameManager.infoText.SetActive(false);
+        ShowKing("Nicely done! Clear a couple more rooms to the side and you'll be able to continue up\nYou can now promote to a Rook and Queen for 10 and 20 energy respecively.");
+    }
+
+    public void EnterThirdRoom() {
+        StartCoroutine(EnterThirdRoomDelay());
+    }
+
+    private IEnumerator EnterThirdRoomDelay() {
+        yield return new WaitForSeconds(2);
+        ShowKing("The Knight enemy is faster and stronger than the pawn.\nBe careful not to get swarmed by them!");
+    }
+
+    public void EnterFourthRoom() {
+        StartCoroutine(EnterFourthRoomDelay());
+    }
+
+    private IEnumerator EnterFourthRoomDelay() {
+        yield return new WaitForSeconds(3);
+        ShowKing("The Rook enemy is stronger and healthier than the others.\nYou might want to use your promotions to deal more damage!");
+    }
+
+    public void Click() {
+        StartCoroutine(ClickDelay());
+    }
+
+    private IEnumerator ClickDelay() {
+        yield return new WaitForSeconds(1.5f);
+        ShowKing("Looks like you've proved you're worthy enough to continue up!\nKeep working your way up to defeat the Queen and claim victory!");
     }
 
 }

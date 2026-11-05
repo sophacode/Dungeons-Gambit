@@ -46,6 +46,7 @@ public class PlayerScript : MonoBehaviour
     private bool firstDashDone;
     public bool canShoot;
     public bool canPromote;
+    private bool firstPromotion;
 
     [SerializeField] GameObject pauseUIPanel;
     [SerializeField] GameObject healthBar;
@@ -59,7 +60,7 @@ public class PlayerScript : MonoBehaviour
         shooting = false;
         attack = 0;
 
-        energy = 20f;
+        energy = 0f;
 
         maxHealth = 10f;
         health = maxHealth;
@@ -77,6 +78,7 @@ public class PlayerScript : MonoBehaviour
         firstDashDone = false;
         canShoot = false;
         canPromote = false;
+        firstPromotion = false;
     }
 
     public void AddEnergy(float value) {
@@ -136,7 +138,6 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void OnPlay() {
-        Debug.Log("Player play");
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().OnPlay();
         GetComponent<PlayerInput>().SwitchCurrentActionMap("Movement");
         pauseUIPanel.SetActive(false);
@@ -147,11 +148,20 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void OnFirstPromote() {
-        if (canPromote) {
-            Debug.Log("Here");
+        if (canPromote && !firstPromotion) {
+            firstPromotion = true;
             OnPlay();
             OnPromoteBishop();
             king.FirstPromotion();
+            canPromote = false;
+        }
+    }
+
+    public void OnSecondPromote() {
+        if (canPromote && firstPromotion) {
+            OnPlay();
+            OnPromoteKnight();
+            king.waiting = false;
         }
     }
 
@@ -221,7 +231,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnPromoteBishop() {
         Debug.Log("Attempting to promote to bishop");
-        if (energy >= 3f) {
+        if (energy >= 3f && canPromote) {
             Debug.Log("Promote");
             attack = 1;
             AddEnergy(-3);
@@ -234,7 +244,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnPromoteKnight() {
         Debug.Log("Attempting to promote to knight");
-        if (energy >= 5f) {
+        if (energy >= 5f && canPromote) {
             Debug.Log("Promote Knight");
             attack = 2;
             AddEnergy(-5);
@@ -247,7 +257,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnPromoteRook() {
         Debug.Log("Attempting to promote to rook");
-        if (energy >= 10f) {
+        if (energy >= 10f && canPromote) {
             Debug.Log("Promote Rook");
             attack = 3;
             AddEnergy(-10);
@@ -260,7 +270,7 @@ public class PlayerScript : MonoBehaviour
 
     public void OnPromoteQueen() {
         Debug.Log("Attempting to promote to queen");
-        if (energy >= 20f) {
+        if (energy >= 20f && canPromote) {
             Debug.Log("Promote Queen");
             attack = 4;
             AddEnergy(-20);

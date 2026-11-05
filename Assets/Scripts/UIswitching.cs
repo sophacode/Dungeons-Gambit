@@ -20,7 +20,6 @@ public class UIswitching : MonoBehaviour
     }   
 
     public void updatePieceFills(float energy) {
-        Debug.Log("Increase UI energy");
         for (int i = 0; i < pieceFilled.Length && i < energyLevels.Length; i++) {
             pieceFilled[i].fillAmount = Mathf.Clamp01(energy / energyLevels[i]);
         }
@@ -28,7 +27,6 @@ public class UIswitching : MonoBehaviour
     
 
     public void resetPieceFills() {
-        Debug.Log("Reset UI energy");
         Color c = new Color(0f, 0f, 0f, 0.7f);  
         foreach (Image img in pieceEmpty) {
             img.color = c;
@@ -39,7 +37,6 @@ public class UIswitching : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        Debug.Log("Main menu Button");
         SceneManager.LoadScene(0);
     }
 
