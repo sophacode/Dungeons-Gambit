@@ -250,9 +250,9 @@ public class PlayerScript : MonoBehaviour
         canTakeDamage = false;
         Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, true);
         Physics2D.IgnoreLayerCollision(playerLayer, bulletLayer, true);
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 20; i++) {
             DashFX();
-            transform.Translate(movementNonZero * dashDistance/15);
+            transform.Translate(movementNonZero.normalized * dashDistance/20);
             yield return null;
         }
         Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, false);
