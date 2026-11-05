@@ -11,6 +11,7 @@ public enum SoundEffect
     PlayerHit,
     PlayerLowHealth,
     PromotePiece,
+    QueenLaser,
     textprint
 }
 

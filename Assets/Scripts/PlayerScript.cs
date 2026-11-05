@@ -89,7 +89,7 @@ public class PlayerScript : MonoBehaviour
                 health = 0f;
                 AudioManager.Play(SoundEffect.PlayerDeath);
                 Die();
-            } else if (health == 1f) {
+            } else if (health == 3f) {
                 AudioManager.Play(SoundEffect.PlayerLowHealth);
             }
         }
@@ -271,6 +271,7 @@ public class PlayerScript : MonoBehaviour
                 foreach (Vector2 dir in v) {
                     GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
                     bulletScript bulletS = newBullet.GetComponent<bulletScript>();
+                    AudioManager.Play(SoundEffect.BulletFire);
                     bulletS.direction = dir;
                     bulletS.bulletSpeed = 10f;
                     bulletS.damage = 1f;
@@ -295,6 +296,8 @@ public class PlayerScript : MonoBehaviour
                 bulletShootDelay = 1f;
             }
             else {
+                // queen attack
+                AudioManager.Play(SoundEffect.QueenLaser);
                 Vector2[] v = new Vector2[] {new(1, 0), new(0,-1), new(-1, 0), new(0, 1), new(1, 1), new(1, -1), new(-1, 1), new(-1, -1)};
                 foreach (Vector2 dir in v) {
                     Debug.Log(Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);

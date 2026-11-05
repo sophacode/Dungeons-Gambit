@@ -11189,20 +11189,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a90f8c36f63a3a40bfe05934fce0976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  volume: 1
+  volume: 0.5
   pitchVariation: 0.05
   spatialBlend: 0
   poolSize: 16
   clips:
   - {fileID: 8300000, guid: b922b3091de5c37499e2e945a40f50d1, type: 3}
   - {fileID: 8300000, guid: 65691fb44ec42c64d9c992149cdeae7d, type: 3}
-  - {fileID: 8300000, guid: 2b9ea76303d432746a2695103eebb6b1, type: 3}
+  - {fileID: 8300000, guid: 7a9d0623f0638fa4f82c930620a95bb1, type: 3}
   - {fileID: 8300000, guid: 12238a5167f596b498a4a52ef4b99837, type: 3}
   - {fileID: 8300000, guid: 1e2fd6de0b609a8469f711fabaa97531, type: 3}
   - {fileID: 8300000, guid: a7aaf94676e2e484684ee8fa84075adc, type: 3}
   - {fileID: 8300000, guid: 050248f14c45f754fb150af073195c92, type: 3}
   - {fileID: 8300000, guid: 22012227dc42f5248a9ea866cc55639c, type: 3}
   - {fileID: 8300000, guid: d4e62115707ee234e8fbce469f42b97f, type: 3}
+  - {fileID: 8300000, guid: 32d8d627f899a034b9f269eac52a4a11, type: 3}
   - {fileID: 8300000, guid: 80f204060290c8741bebad581800fbf4, type: 3}
 --- !u!4 &1519624984
 Transform:

@@ -11,6 +11,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float damage) {
         health -= damage;
+        AudioManager.Play(SoundEffect.EnemyHit);
         StartCoroutine(Flicker());
         if (health <= 0f) {
             alive = false;
@@ -51,6 +52,7 @@ public class EnemyHealth : MonoBehaviour
             sr.color = new Color(c.r, c.g, c.b, alpha);
             yield return null;
         }
+        AudioManager.Play(SoundEffect.EnemyDeath);
         Destroy(gameObject);
     }
 
