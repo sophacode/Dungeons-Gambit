@@ -124,6 +124,7 @@ public class GameManagerScript : MonoBehaviour
         else {
             Destroy(Timer);
         }
+        Time.timeScale = 1f;
     }
 
 
