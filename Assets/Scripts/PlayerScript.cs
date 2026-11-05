@@ -189,7 +189,6 @@ public class PlayerScript : MonoBehaviour
 
     public void OnPromoteBishop() {
         Debug.Log("Attempting to promote to bishop");
-        AudioManager.Play(SoundEffect.PromotePiece);
         if (energy >= 3f) {
             Debug.Log("Promote");
             attack = 1;
@@ -197,12 +196,12 @@ public class PlayerScript : MonoBehaviour
             anim.SetTrigger("PromoteBishop");
             promotionTime = 10f;
             promotionSprite.GetComponent<Image>().sprite = pieceSprites[1];
+            AudioManager.Play(SoundEffect.PromotePiece);
         }
     }
 
     public void OnPromoteKnight() {
         Debug.Log("Attempting to promote to knight");
-        AudioManager.Play(SoundEffect.PromotePiece);
         if (energy >= 5f) {
             Debug.Log("Promote Knight");
             attack = 2;
@@ -210,12 +209,12 @@ public class PlayerScript : MonoBehaviour
             anim.SetTrigger("PromoteKnight");
             promotionTime = 10f;
             promotionSprite.GetComponent<Image>().sprite = pieceSprites[2];
+            AudioManager.Play(SoundEffect.PromotePiece);
         }
     }
 
     public void OnPromoteRook() {
         Debug.Log("Attempting to promote to rook");
-        AudioManager.Play(SoundEffect.PromotePiece);
         if (energy >= 10f) {
             Debug.Log("Promote Rook");
             attack = 3;
@@ -223,12 +222,12 @@ public class PlayerScript : MonoBehaviour
             anim.SetTrigger("PromoteRook");
             promotionTime = 10f;
             promotionSprite.GetComponent<Image>().sprite = pieceSprites[3];
+            AudioManager.Play(SoundEffect.PromotePiece);
         }
     }
 
     public void OnPromoteQueen() {
         Debug.Log("Attempting to promote to queen");
-        AudioManager.Play(SoundEffect.PromotePiece);
         if (energy >= 20f) {
             Debug.Log("Promote Queen");
             attack = 4;
@@ -236,6 +235,7 @@ public class PlayerScript : MonoBehaviour
             anim.SetTrigger("PromoteQueen");
             promotionTime = 10f;
             promotionSprite.GetComponent<Image>().sprite = pieceSprites[4];
+            AudioManager.Play(SoundEffect.PromotePiece);
         }
     }
 
