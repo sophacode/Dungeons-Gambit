@@ -32,6 +32,8 @@ public class GameManagerScript : MonoBehaviour
     public bool firstEnemyKilled;
     public bool secondWave;
 
+    public GameObject Timer;
+
     public void OnPause() {
         if (active) {
             active = false;
@@ -110,9 +112,11 @@ public class GameManagerScript : MonoBehaviour
         else if (GlobalInfoScript.speedrun) {
             firstEnemyKilled = true;
             secondWave = true;
-            roomCounter = 6;
-            roomsCompleted = 5;
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().Speedrun();
+            Timer.SetActive(true);
+        }
+        else {
+            Destroy(Timer);
         }
     }
 
@@ -151,8 +155,10 @@ public class GameManagerScript : MonoBehaviour
     }
 
     private void RoomComplete() {
-        if (roomCounter == 2) {
-            king.SecondRoomComplete();
+        if (!GlobalInfoScript.speedrun) {
+            if (roomCounter == 2) {
+                king.SecondRoomComplete();
+            }
         }
         roomsCompleted += 1;
         Debug.Log("Complete");
@@ -170,15 +176,18 @@ public class GameManagerScript : MonoBehaviour
     }
 
     public void EnterRoom(int room) {
-        if (room == 2) {
-            king.EnterSecondRoom();
+        if (!GlobalInfoScript.speedrun) {
+            if (room == 2) {
+                king.EnterSecondRoom();
+            }
+            else if (room == 3) {
+                king.EnterThirdRoom();
+            }
+            else if (room == 4) {
+                king.EnterFourthRoom();
+            }
         }
-        else if (room == 3) {
-            king.EnterThirdRoom();
-        }
-        else if (room == 4) {
-            king.EnterFourthRoom();
-        }
+        
         roomCounter = room;
         doors.SetActive(true);
         pathway.SetActive(false);
