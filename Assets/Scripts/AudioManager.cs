@@ -46,7 +46,7 @@ public class AudioManager : MonoBehaviour
             string[] guids = UnityEditor.AssetDatabase.FindAssets(names[i] + " t:AudioClip", new[] { "Assets/Sound" });
             if (guids.Length == 0)
             {
-                Debug.LogWarning($"AudioManager: no file found for {names[i]}");
+                //Debug.LogWarning($"AudioManager: no file found for {names[i]}");
                 continue;
             }
 
@@ -61,7 +61,7 @@ public class AudioManager : MonoBehaviour
             UnityEditor.PrefabUtility.RecordPrefabInstancePropertyModifications(this);
         }
         
-        Debug.Log("AudioManager: Clips loaded successfully! Don't forget to save your scene/prefab.");
+        //Debug.Log("AudioManager: Clips loaded successfully! Don't forget to save your scene/prefab.");
     }
 #endif
 
@@ -93,7 +93,7 @@ public class AudioManager : MonoBehaviour
     {
         if (Instance == null)
         {
-            Debug.LogWarning("AudioManager: no instance in scene.");
+            //Debug.LogWarning("AudioManager: no instance in scene.");
             return;
         }
 
@@ -104,14 +104,14 @@ public class AudioManager : MonoBehaviour
     {
         if (clips == null || clips.Length == 0)
         {
-            Debug.LogWarning("AudioManager: clips array is empty. Right-click AudioManager and run 'Load Clips'.");
+            //Debug.LogWarning("AudioManager: clips array is empty. Right-click AudioManager and run 'Load Clips'.");
             return;
         }
 
         int index = (int)effect;
         if (index >= clips.Length || clips[index] == null)
         {
-            Debug.LogWarning($"AudioManager: slot for {effect} is None.");
+            //Debug.LogWarning($"AudioManager: slot for {effect} is None.");
             return;
         }
 

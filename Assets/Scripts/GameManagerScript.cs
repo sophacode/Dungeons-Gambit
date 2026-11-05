@@ -164,7 +164,6 @@ public class GameManagerScript : MonoBehaviour
             }
         }
         roomsCompleted += 1;
-        Debug.Log("Complete");
         doors.SetActive(false);
         pathway.SetActive(true);
         pathwayWalls.SetActive(true);
@@ -219,7 +218,6 @@ public class GameManagerScript : MonoBehaviour
                         secondWave = true;
                         king.SecondWaveFinished();
                     }
-                    Debug.Log("Wave Clear");
                     StartCoroutine(FlashText("Wave Clear!"));
                 }
                 wave ++;

@@ -147,7 +147,6 @@ public class PlayerScript : MonoBehaviour
     }
 
     private void Die() {
-        Debug.Log("DEAD");
         AudioManager.Play(SoundEffect.PlayerDeath);
         if (!GlobalInfoScript.speedrun && GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManagerScript>().roomCounter == 6) {
             SceneManager.LoadScene(3);
@@ -248,7 +247,6 @@ public class PlayerScript : MonoBehaviour
     }
 
     private void UnPromote() {
-        Debug.Log("Unpromote");
         attack = 0;
         anim.SetBool("Walking", false);
         anim.SetTrigger("Unpromote");
@@ -258,9 +256,7 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void OnPromoteBishop() {
-        Debug.Log("Attempting to promote to bishop");
         if (energy >= 3f && canPromote) {
-            Debug.Log("Promote");
             attack = 1;
             AddEnergy(-3);
             anim.SetTrigger("PromoteBishop");
@@ -271,9 +267,7 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void OnPromoteKnight() {
-        Debug.Log("Attempting to promote to knight");
         if (energy >= 5f && canPromote) {
-            Debug.Log("Promote Knight");
             attack = 2;
             AddEnergy(-5);
             anim.SetTrigger("PromoteKnight");
@@ -284,9 +278,7 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void OnPromoteRook() {
-        Debug.Log("Attempting to promote to rook");
         if (energy >= 10f && canPromote) {
-            Debug.Log("Promote Rook");
             attack = 3;
             AddEnergy(-10);
             anim.SetTrigger("PromoteRook");
@@ -297,9 +289,7 @@ public class PlayerScript : MonoBehaviour
     }
 
     public void OnPromoteQueen() {
-        Debug.Log("Attempting to promote to queen");
         if (energy >= 20f && canPromote) {
-            Debug.Log("Promote Queen");
             attack = 4;
             AddEnergy(-20);
             anim.SetTrigger("PromoteQueen");
@@ -373,7 +363,6 @@ public class PlayerScript : MonoBehaviour
                 AudioManager.Play(SoundEffect.QueenLaser);
                 Vector2[] v = new Vector2[] {new(1, 0), new(0,-1), new(-1, 0), new(0, 1), new(1, 1), new(1, -1), new(-1, 1), new(-1, -1)};
                 foreach (Vector2 dir in v) {
-                    Debug.Log(Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
                     GameObject newLaser = Instantiate(laser, transform.position, Quaternion.Euler(0,0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg));
                     bulletShootDelay = 1f;
                 }

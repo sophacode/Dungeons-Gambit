@@ -106,13 +106,11 @@ public class EnemyQueenScript : MonoBehaviour
 
     private void SpawnTroops() {
         int r = UnityEngine.Random.Range(4, 8);
-        Debug.Log(r);
         StartCoroutine(Spawn(r));
     }
 
     private IEnumerator Spawn(int number) {
         for (int i = 0; i < number; i++){
-            Debug.Log("Spawn new pawn");
             GameObject newPawn = Instantiate(pawn, laserAnchor.position, Quaternion.identity);
             newPawn.GetComponent<EnemyScript>().energyValue = 1;
             gameManager.enemiesAlive += 1;
