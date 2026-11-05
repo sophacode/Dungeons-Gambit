@@ -16,9 +16,10 @@ public class GameManagerScript : MonoBehaviour
     public int roomCounter;
     private int roomsCompleted;
     public bool active;
+    private bool needToReactivate;
 
     private readonly int[] xBounds = new int[] {14, 14, -50, 78, 14};
-    private readonly int[] yBounds = new int[] {14, 78, 78, 78, 132};
+    private readonly int[] yBounds = new int[] {14, 78, 78, 78, 142};
 
     public GameObject doors;
     public GameObject specialdoor;
@@ -28,28 +29,20 @@ public class GameManagerScript : MonoBehaviour
     public GameObject infoText;
 
     public void OnPause() {
-        active = false;
+        if (active) {
+            active = false;
+            needToReactivate = true;
+        }
         Time.timeScale = 0f;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().shooting = false;
-        /*
-        foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet")) {
-            if (bullet.TryGetComponent<bulletScript>(out bulletScript b)) { b.PauseBullet(); }
-            if (bullet.TryGetComponent<EnemyBishopBulletScript>(out EnemyBishopBulletScript bb)) { bb.PauseBullet(); }
-            if (bullet.TryGetComponent<EnemyRookBulletScript>(out EnemyRookBulletScript bbb)) { bbb.PauseBullet(); }
-        }
-        */
     }
 
     public void OnPlay() {
-        active = true;
-        Time.timeScale = 1f;
-        /*
-        foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet")) {
-            if (bullet.TryGetComponent<bulletScript>(out bulletScript b)) { b.ResetSpeed(); }
-            if (bullet.TryGetComponent<EnemyBishopBulletScript>(out EnemyBishopBulletScript bb)) { bb.ResetSpeed(); }
-            if (bullet.TryGetComponent<EnemyRookBulletScript>(out EnemyRookBulletScript bbb)) { bbb.ResetSpeed(); }
+        if (needToReactivate) {
+            active = true;
+            needToReactivate = false;
         }
-        */
+        Time.timeScale = 1f;
     }
 
     private void Awake()
@@ -57,6 +50,7 @@ public class GameManagerScript : MonoBehaviour
         wave = 0;
         enemiesAlive = 0;
         active = true;
+        needToReactivate = false;
 
         roomCounter = 1;
         roomsCompleted = 0;
@@ -135,7 +129,7 @@ public class GameManagerScript : MonoBehaviour
         doors.SetActive(false);
         pathway.SetActive(true);
         pathwayWalls.SetActive(true);
-        if (roomsCompleted >= 4) {
+        if (roomsCompleted == 4) {
             specialdoor.SetActive(false);
             StartCoroutine(FlashText("Click!\n(A door is unlocked somewhere)"));
         }
@@ -157,8 +151,10 @@ public class GameManagerScript : MonoBehaviour
     {
         if (active && enemiesAlive <= 0) {
             if (wave < 3) {
-                Debug.Log("Wave Clear");
-                StartCoroutine(FlashText("Wave Clear!"));
+                if (wave != 0) {
+                    Debug.Log("Wave Clear");
+                    StartCoroutine(FlashText("Wave Clear!"));
+                }
                 wave ++;
                 SpawnEnemy();
             }
